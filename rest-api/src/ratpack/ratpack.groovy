@@ -22,7 +22,11 @@ ratpack {
 	get("question/random") {
 		render groovyTemplate('question.html', question: getRandomQuestion())
 	}		
-		  
+
+	get("api") {
+		render groovyTemplate('api.html')
+	}
+
 	//////////////////////////////////////////////
 	// API 
 	//////////////////////////////////////////////
@@ -73,7 +77,7 @@ ratpack {
 		
 	get("api/image/:id") {
 		def id = DataService.getPathId(request.path)
-		def file = new File("${FILE_STORAGE}/${id}")
+		def file = new File("${FILE_STORAGE}/${id}.png")
 		if (!file.exists()) {
 			response.status(404) 	
 			render '{ "response": "Not Found" }'
@@ -82,13 +86,13 @@ ratpack {
 		}
     }
 
-	post("api/image/:id") {
-		def id = DataService.getPathId(request.path)
-		def file = new File("${FILE_STORAGE}/${id}")
+	post("api/images/new") {
+		def id = UUID.randomUUID().toString()
+		def file = new File("${FILE_STORAGE}/${id}.png")
 		file.withOutputStream { stream ->
 			request.writeBodyTo(stream)
 		}		
-		render '{ "response": "OK" }'
+		render '{ "_id" : "' + id + '", "response": "OK" }'
 	}
 
     assets "public"

@@ -39,7 +39,7 @@ project.ext {
 
   questions = [
     [ 
-      _id: UUID.randomUUID(),
+      _id: UUID.randomUUID().toString(),
       _random: (Integer) (Math.random() * 100),
       title: 'Which colour of shoes is gonna be trending in S/S 2014?',
       answers: [
@@ -50,7 +50,7 @@ project.ext {
       ]
     ],
     [ 
-      _id: UUID.randomUUID(),
+      _id: UUID.randomUUID().toString(),
       _random: (Integer) (Math.random() * 100),
       title: 'What is your role at Garage48?', 
       answers: [
@@ -62,7 +62,7 @@ project.ext {
       ]
     ],
     [ 
-      _id: UUID.randomUUID(),
+      _id: UUID.randomUUID().toString(),
       _random: (Integer) (Math.random() * 100),
       title: 'Which of these languages can you use?', 
       answers: [
@@ -73,7 +73,7 @@ project.ext {
       ]
     ],
     [ 
-      _id: UUID.randomUUID(),
+      _id: UUID.randomUUID().toString(),
       _random: (Integer) (Math.random() * 100),
       title: 'What did you have for dinner yesterday?', 
       answers: [
@@ -84,7 +84,7 @@ project.ext {
       ]
     ],
     [ 
-      _id: UUID.randomUUID(),
+      _id: UUID.randomUUID().toString(),
       _random: (Integer) (Math.random() * 100),
       title: 'What did you have dreams about last night?', 
       answers: [
@@ -95,7 +95,7 @@ project.ext {
       ]
     ],
     [ 
-      _id: UUID.randomUUID(),
+      _id: UUID.randomUUID().toString(),
       _random: (Integer) (Math.random() * 100),
       title: 'Did you sleep last night?', 
       answers: [
@@ -166,8 +166,8 @@ task deploy(dependsOn: distZip) << {
         remoteDir "/tmp"
       }
     }
-    exec('sudo mkdir -p /var/lib/tellme/storage', failOnError: false)
-    exec('sudo rm -rf /var/lib/tellme/*', failOnError: false)  
+    exec(command: 'sudo mkdir -p /var/lib/tellme/storage', failOnError: false)
+    exec(command: 'sudo rm -rf /var/lib/tellme/*', failOnError: false)  
     exec 'sudo unzip /tmp/rest-api.zip -d /var/lib/tellme'
     exec 'sudo chown -R ubuntu:ubuntu /var/lib/tellme'
     exec 'cd /var/lib/tellme/rest-api/bin ; nohup sudo -b ./rest-api > /var/lib/tellme/rest-api/server.log'

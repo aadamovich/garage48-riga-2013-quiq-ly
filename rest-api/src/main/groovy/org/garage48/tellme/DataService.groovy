@@ -48,13 +48,13 @@ class DataService {
 	}
 
 	static insertQuestion(question) {
-		question.'_id' = UUID.randomUUID()
+		question.'_id' = UUID.randomUUID().toString()
 		question.'_random' =  (Integer) (Math.random() * 100)
 		db.questions.insert(question)
 	}
 
 	static insertAnswer(answer) {
-		answer.'_id' = UUID.randomUUID()
+		answer.'_id' = UUID.randomUUID().toString()
 		db.answers.insert(answer)
 	}
 
