@@ -24,15 +24,25 @@ class DataService {
 	static getRandomQuestions(limit) {
 		def response = [questions: []]
 		db.questions.find().limit(limit).sort('_random': 1).each { question ->
-			question.remove('_random')
-			response.questions << question
-			db.answers.group([question_id: true], [:], [count: 0], "function(doc, out) { out.count += 1 }").each { answerStats ->
+			question.remove('_random')			
+			db.answers.aggregate(
+			  [
+				$project : [ title: 1, question_id: 1 ]
+			  ],
+			  [
+				$match : [ question_id: question._id ]
+			  ],
+		      [
+				$group: [ _id : [ question_id: '$question_id', title: '$title'], count: [ $sum: 1 ] ]   
+			  ]
+			).results().each { answerStats ->
 			  question.answers.each { answer ->
-				  if (answerStats.title == answer.title) {
-					  answer.value = answerCount.count 
-				  }				  
+				  if (answerStats._id.title == answer.title) {
+					  answer.value = answerStats.count
+				  }
 			  }
-		    }
+			} 
+			response.questions << question
 		}		
 		produceJson(response)
 	}

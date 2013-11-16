@@ -1,11 +1,11 @@
 import static org.garage48.tellme.DataService.*
-import static ratpack.groovy.Groovy.*
+import ratpack.groovy.templating.*
 
 import groovy.json.JsonSlurper
-
 import org.garage48.tellme.*
-
 import ratpack.groovy.templating.*
+
+import static ratpack.groovy.Groovy.*
 
 ratpack {
 
