@@ -23,7 +23,7 @@ class DataService {
 	static getRandomQuestions(limit) {
 		def response = [questions: []]
 		db.questions.find().limit(limit).each { question ->		
-			enrishQuestion(question)				
+			enrichQuestion(question)				
 			response.questions << question
 		}		
 		produceJson(response)
