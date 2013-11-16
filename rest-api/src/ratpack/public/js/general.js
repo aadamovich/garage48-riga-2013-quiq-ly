@@ -1,18 +1,35 @@
 jQuery(document).ready(function() { 
 
-	// Open Statistics
-	$('#device-display a').click(function(){
-		$('#device-display a').removeClass('selected');
-		$(this).addClass('selected');
+	// Navigation
+	$('#answer a').click(function(){
+		var activeSlide = $(this).attr('data-slide');
+
+		if(activeSlide == 0) {
+			$(this).attr('data-slide', -1);
+		} else {
+			$(this).attr('data-slide', 0);
+		}
+
 		$('#content').animate({
-			left: "300px"
-		}, 900);
-		$('#main-nav').animate({
-			left: "0px"
-		}, 900);
+		  left : (100*(activeSlide)) + "%"
+		}, 1000, function() {
+			if(activeSlide == -1) {				
+				drawChart(getData());
+			}
+		});
 
 		return false;
 	});
 
  });
+
+// Draws a chart.
+function drawChart(data) {
+
+  // Get context with jQuery - using jQuery's .get() method.
+  var ctx = $("#myChart").get(0).getContext("2d");
+  // This will get the first returned node in the jQuery collection.
+  var myNewChart = new Chart(ctx).Doughnut(data);
+
+}
 

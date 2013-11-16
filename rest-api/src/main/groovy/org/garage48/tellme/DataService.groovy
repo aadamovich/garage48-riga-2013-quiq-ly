@@ -29,7 +29,7 @@ class DataService {
 		produceJson(response)
 	}
 
-	static getRandomQuestion() {
+	static getRandomQuestion() {		  
 		int questionCount = db.questions.count()
 		def question = null
 		db.questions.find().limit(1).skip(RNG.nextInt(questionCount)).each {
@@ -40,6 +40,8 @@ class DataService {
 	}	
 
 	static private enrichQuestion(question) {
+		def colors = [ "#F7464A", "#E2EAE9", "#D4CCC5", "#949FB1", "#4D5360" ]
+		def colorCounter = 0
 		question.remove('_random')
 		db.answers.aggregate(
 			[
@@ -51,10 +53,11 @@ class DataService {
 			[
 			  $group: [ _id : [ question_id: '$question_id', title: '$title'], count: [ $sum: 1 ] ]
 			]
-		  ).results().each { answerStats ->
+		  ).results().each { answerStats ->		    
 			question.answers.each { answer ->
 				if (answerStats._id.title == answer.title) {
 					answer.value = answerStats.count
+					answer.color = colors[(colorCounter++) % colors.size()]
 				}
 			}
 		  }
