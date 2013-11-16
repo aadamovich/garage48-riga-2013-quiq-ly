@@ -46,8 +46,6 @@ dependencies {
   springloaded 'org.springsource.springloaded:springloaded-core:1.1.4'
   compile 'com.gmongo:gmongo:1.0'
   compile 'org.codehaus.groovy:groovy-all:2.1.9'
-  testCompile 'junit:junit:4.11'
-  testCompile 'com.jayway.restassured:rest-assured:1.8.1'
 }
 
 test.onlyIf { false }
@@ -68,14 +66,13 @@ insertData.mustRunAfter cleanDb
 task insertHttpData << {
   getData().each { question ->
     def request = new JsonBuilder(question).toString()
-    getHttp().request(POST, JSON) { req ->
-      body = question
+    getHttp('api/questions/new').request(POST, JSON) { req ->
+      body = request
       response.success = { resp, json ->
       }
     }
   }
 }
-
 
 task deploy(dependsOn: distZip) << {
   // TODO: stop server
@@ -89,8 +86,8 @@ def getDb() {
   mongo.getDB('tell-me')
 }
 
-def getHttp() {
-  new HTTPBuilder('http://localhost:2000')
+def getHttp(path) {
+  new HTTPBuilder('http://localhost:2000/' + path)
 }
 
 def getData() {

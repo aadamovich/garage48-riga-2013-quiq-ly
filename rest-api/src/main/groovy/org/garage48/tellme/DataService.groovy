@@ -37,7 +37,7 @@ class DataService {
 	}
 	
 	static produceJson(content) {
-		content ? new JsonBuilder(content).toString() : '{ "response": "no-data" } '
+		content ? new JsonBuilder(content).toString() : '{ "response": "no-data" }'
 	}
 	
 }
