@@ -154,7 +154,7 @@ h1#qtitle {
   display: none;
 }
 .qplace li label {
-  background: url(img/unchecked.png) 20px 11px no-repeat;
+  background: url(/img/unchecked.png) 20px 11px no-repeat;
   width: 100%;
   height: 42px;
   display: block;
@@ -162,7 +162,7 @@ h1#qtitle {
   padding: 0 55px;
 }
 .qplace li input:checked + label {
-  background: url(img/checked.png) 20px 11px no-repeat;
+  background: url(/img/checked.png) 20px 11px no-repeat;
 }
 
 /*-----------------------------------------------------------------------------------
