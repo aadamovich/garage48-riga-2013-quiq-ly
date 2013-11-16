@@ -11,7 +11,9 @@ class DataService {
 	static final Random RNG = new Random() 
 	
 	static getQuestion(String id) {
-		produceJson(db.questions.findOne('_id': id))
+		def question = db.questions.findOne('_id': id)
+		enrichQuestion(question)
+		produceJson(question)
 	}
 
 	static getPathId(String path) {
@@ -20,9 +22,8 @@ class DataService {
 	
 	static getRandomQuestions(limit) {
 		def response = [questions: []]
-		db.questions.find().limit(limit).each { question ->
-			question.remove('_random')		
-			getAnswerStats(question)				
+		db.questions.find().limit(limit).each { question ->		
+			enrishQuestion(question)				
 			response.questions << question
 		}		
 		produceJson(response)
@@ -33,13 +34,13 @@ class DataService {
 		def question = null
 		db.questions.find().limit(1).skip(RNG.nextInt(questionCount)).each {
 		  question = it
-		  question.remove('_random')
-		  getAnswerStats(question)
+		  enrichQuestion(question)
 		}
 		question
 	}	
 
-	static private getAnswerStats(question) {
+	static private enrichQuestion(question) {
+		question.remove('_random')
 		db.answers.aggregate(
 			[
 			  $project : [ title: 1, question_id: 1 ]
