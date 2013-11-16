@@ -51,7 +51,7 @@
       <ul id="footer-nav">
         <li id="me"><a href="/profile">Me</a></li>
         <li id="ask"><a href="/question/ask">Ask?</a></li>
-        <li id="answer"><a href="javascript:answerQuestion();" data-slide="-1">Answer!<span class="skip"></span></a></li>
+        <li id="answer"><a href="" data-slide="-1">Answer!<span class="skip"></span></a></li>
       </ul>
     </footer> 
   </div>  
@@ -72,18 +72,6 @@
       ];
       return data;
     }  
-  </script>
-  <script>
-    function answerQuestion() {
-		  \$.ajax({
-			  type: "POST",
-			  url: "/api/answers/new",
-			  data: 
-				   '{ "question_id": "' + \$('#question_id').val() + '",' +
-				   '  "title": "' + \$('.answers input').filter(':checked').val() + '"}',
-				dataType: "json"
-			});
-    }
   </script>
   <script type="text/javascript" src="/js/general.js"></script>  
 </body>
