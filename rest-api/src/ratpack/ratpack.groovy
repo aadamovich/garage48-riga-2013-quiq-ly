@@ -12,9 +12,25 @@ ratpack {
 	get {
 		render "Tell.me API endpoint."
 	}
-	  
-    get("api/questions/random") {
-		render getRandomQuestions(10)  
+
+	//////////////////////////////////////////////
+	// Web interface
+	//////////////////////////////////////////////
+	
+	get("question/random") {
+		render groovyTemplate('question.html', question: getRandomQuestion())
+	}		
+		  
+	//////////////////////////////////////////////
+	// API 
+	//////////////////////////////////////////////
+
+    get("api/questions/random/:amount") {
+		render getRandomQuestions(request.queryParams.amount)  
+	}
+
+	get("api/questions/random1") {
+		render getRandomQuestion()
 	}
 
 	post("api/questions/new") {

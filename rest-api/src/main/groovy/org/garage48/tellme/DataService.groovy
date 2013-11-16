@@ -11,6 +11,10 @@ class DataService {
 		produceJson(db.questions.findOne(id: id))
 	}
 
+	static getRandomQuestion() {
+		produceJson(db.questions.findOne())
+	}		
+	
 	static getRandomQuestions(limit) {
 		def response = [questions: []]
 		db.questions.find().each {

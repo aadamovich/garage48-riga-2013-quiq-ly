@@ -25,6 +25,7 @@ buildscript {
 
 project.ext {
   local = [
+    server: 'localhost',
     database : 'localhost:27017',
     api : 'http://localhost:5050'
   ]
@@ -90,7 +91,8 @@ task deploy(dependsOn: distZip) << {
         remoteDir "/tmp"
       }
     }
-    exec 'sudo mkdir -p /var/lib/tellme'   
+    exec('sudo mkdir -p /var/lib/tellme', failOnError: false)
+    exec('sudo rm -rf /var/lib/tellme/*', failOnError: false)  
     exec 'sudo unzip /tmp/rest-api.zip -d /var/lib/tellme'
     exec 'sudo chown -R ubuntu:ubuntu /var/lib/tellme'
     exec 'cd /var/lib/tellme/rest-api/bin ; nohup sudo -b ./rest-api > /var/lib/tellme/rest-api/server.log'
@@ -114,8 +116,13 @@ def getSsh() {
 }
 
 def getDb() {
-  def mongo = new GMongo()
-  mongo.getDB('tell-me')
+  if (project.hasProperty('env') && project.env == 'production') {
+    def mongo = new GMongo(project.production.database)
+    return mongo.getDB('tell-me')
+  } else {
+    def mongo = new GMongo()
+    return mongo.getDB('tell-me')
+  }
 }
 
 def getHttp(path) {
@@ -145,6 +152,40 @@ def getData() {
         [ title: 'Designer', value: '30' ],
         [ title: 'Developer', value: '47' ],
         [ title: 'Miley Cyrus', value: '1' ],
+      ]
+    ],
+    [ 
+      title: 'Which of these languages can you use?', 
+      answers: [
+        [ title: 'Ruby', value: '38' ],
+        [ title: 'Python', value: '20' ],
+        [ title: 'Java', value: '27' ],
+        [ title: 'Groovy', value: '15' ],
+      ]
+    ],
+    [ 
+      title: 'What did you have for dinner yesterday?', 
+      answers: [
+        [ title: 'Cheese salad', value: '12' ],
+        [ title: 'Cheese salad (2 hours old)', value: '14' ],
+        [ title: 'Cheese salad (5 hours old)', value: '45' ],
+        [ title: 'Red Bull', value: '39' ],
+      ]
+    ],
+    [ 
+      title: 'What did you have dreams about last night?', 
+      answers: [
+        [ title: 'Cheese salad', value: '3' ],
+        [ title: 'Female designers', value: '27' ],
+        [ title: 'Nokia Lumias and iPads', value: '44' ],
+        [ title: 'Miley Cyrus', value: '26' ],
+      ]
+    ],
+    [ 
+      title: 'Did you sleep last night?', 
+      answers: [
+        [ title: 'Hell yeah', value: '35' ],
+        [ title: 'Not really', value: '65' ],
       ]
     ],
   ]
