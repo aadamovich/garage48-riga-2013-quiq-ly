@@ -9,18 +9,22 @@ class DataService {
 
 	static final FILE_STORAGE = '/var/lib/tellme/storage'
 	static final Random RNG = new Random() 
-	
-	static getQuestion(String id) {
-		def question = db.questions.findOne('_id': id)
-		enrichQuestion(question)
-		produceJson(question)
-	}
 
 	static getPathId(String path) {
 		path.split('/').last()
-	}		
+	}
+
+	static getQuestion(String id) {
+		def question = db.questions.findOne('_id': id)
+		enrichQuestion(question)
+		question
+	}
+
+	static getJsonQuestion(String id) {
+		produceJson(getQuestion(id))
+	}
 	
-	static getRandomQuestions(limit) {
+	static getJsonRandomQuestions(limit) {
 		def response = [questions: []]
 		db.questions.find().limit(limit).each { question ->		
 			enrichQuestion(question)				

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+  <!-- Meta Tags -->
+  <meta charset="UTF-8">
+  <title>Quiq.ly</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes"> 
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/style.css">
+  
+</head>
+<body>
+
+  <div id="container">
+  
+    <nav id="main-nav">
+      <p id="author">Asked by: <span>Quiqly</span></p>
+      <p id="time">just now</p>
+      <span id="tick"></span>
+    </nav>
+    
+    <div id="content">
+      <div id="qplace">
+        <div id="qtitle"><h1>${model.question.title}</h1></div>
+        <img src="" class="qthumb">
+        <input id="question_id" type="hidden" value="${model.question._id}">
+        <ul class="answers">
+          <% model.question.answers.each { answer -> %>
+          <li>
+            <input type="radio" value="${answer.title}" id="${answer.title}" name="select">
+            <label for="${answer.title}">${answer.title}</label>
+          </li>
+          <% } %>
+        </ul> 
+      </div>
+      <div id="qgraph">
+        <div id="qtitle" class="small">
+          <h1>${model.question.title}</h1>  
+        </div>
+        <canvas id="myChart" width="280" height="368"></canvas> 
+      </div>    
+    </div>
+
+    <footer id="main-footer">
+      <ul id="footer-nav">
+        <li id="me"><a href="/profile">Me</a></li>
+        <li id="ask"><a href="/question/ask">Ask?</a></li>
+        <li id="answer"><a href="javascript:answerQuestion();" data-slide="-1">Answer!<span class="skip"></span></a></li>
+      </ul>
+    </footer> 
+  </div>  
+
+  <!-- JS -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="/js/chart.js"></script>
+  <script type="text/javascript">  
+    // Something happens here.
+    function getData() {    	      
+      var data = [
+        <% model.question.answers.each { answer -> %>                 
+        {
+          value: ${answer.value},
+          color: "${answer.color}"
+        },
+        <% } %>
+      ];
+      return data;
+    }  
+  </script>
+  <script>
+    function answerQuestion() {
+		  \$.ajax({
+			  type: "POST",
+			  url: "/api/answers/new",
+			  data: 
+				   '{ "question_id": "' + \$('#question_id').val() + '",' +
+				   '  "title": "' + \$('.answers input').filter(':checked').val() + '"}',
+				dataType: "json"
+			});
+    }
+  </script>
+  <script type="text/javascript" src="/js/general.js"></script>  
+</body>
+</html>

@@ -11,17 +11,30 @@ ratpack {
 
   handlers {
 	  	  
-	get {
-		render "Welcome to Quiq.ly!"
-	}
-
 	//////////////////////////////////////////////
 	// Web interface
 	//////////////////////////////////////////////
-	
+	  
+	get {
+		render groovyTemplate('landing.html')
+	}
+	  
 	get("question/random") {
-		render groovyTemplate('question.html', question: getRandomQuestion())
+		render groovyTemplate('answer.html', question: getRandomQuestion())
 	}		
+
+	get("question/ask") {
+		render groovyTemplate('ask.html')
+	}
+
+	get("questions/:id") {
+		def id = DataService.getPathId(request.path)
+		render groovyTemplate('answer.html', question: getQuestion(id))
+	}
+
+	get("profile") {
+		render groovyTemplate('profile.html')
+	}
 
 	get("api") {
 		render groovyTemplate('api.html')
@@ -37,7 +50,7 @@ ratpack {
 		if (amountString) {
 			amount = amountString.toInteger()
 		}
-		render getRandomQuestions(amount)  
+		render getJsonRandomQuestions(amount)  
 	}
 
 	get("api/questions/random") {
@@ -53,7 +66,7 @@ ratpack {
 
 	get('api/question/:id') { 
 		def idString = DataService.getPathId(request.path)
-		response.send('application/json', getQuestion(idString))
+		response.send('application/json', getJsonQuestion(idString))
 	}
 
 	delete('api/question/:id') {
@@ -64,7 +77,7 @@ ratpack {
 
 	put('api/question/:id') {
 		def id = DataService.getPathId(request.path)
-		DataService.updateQuestion(id)
+		updateQuestion(id)
 		render '{ "response": "OK" }'
 	}
 

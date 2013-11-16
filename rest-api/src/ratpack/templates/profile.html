@@ -27,15 +27,9 @@
     
     <div id="content">
       <div id="qplace">
-        <div id="qtitle"><h1>${model.question.title}</h1></div>
+        <div id="qtitle"><h1></h1></div>
         <img src="" class="qthumb">
         <ul class="answers">
-          <% model.question.answers.each { answer -> %>
-          <li>
-            <input type="radio" value="${answer.title}" id="${answer.title}" name="select">
-            <label for="${answer.title}">${answer.title}</label>
-          </li>
-          <% } %>
         </ul> 
       </div>
       <div id="qgraph">
@@ -48,30 +42,15 @@
 
     <footer id="main-footer">
       <ul id="footer-nav">
-        <li id="me"><a href="">Me</a></li>
-        <li id="ask"><a href="">Ask?</a></li>
-        <li id="answer"><a href="" data-slide="-1">Answer!<span class="skip"></span></a></li>
+        <li id="me"><a href="/profile">Me</a></li>
+        <li id="ask"><a href="/question/ask">Ask!</a></li>
+        <li id="answer"><a href="/question/answer">Answer!<span class="skip"></span></a></li>
       </ul>
     </footer> 
   </div>  
 
   <!-- JS -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script src="/js/chart.js"></script>
-  <script type="text/javascript">  
-    // Something happens here.
-    function getData() {    	      
-      var data = [
-        <% model.question.answers.each { answer -> %>                 
-        {
-          value: ${answer.value},
-          color: "${answer.color}"
-        },
-        <% } %>
-      ];
-      return data;
-    }  
-  </script>
-  <script type="text/javascript" src="/js/general.js"></script>  
+    
 </body>
 </html>

@@ -17,8 +17,6 @@ jQuery(document).ready(function() {
 				drawChart(getData());
 			}
 		});
-
-		return false;
 	});
 
  });
