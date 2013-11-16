@@ -12,7 +12,7 @@ ratpack {
   handlers {
 	  	  
 	get {
-		render "Tell.me API endpoint."
+		render "Welcome to Quiq.ly!"
 	}
 
 	//////////////////////////////////////////////
@@ -28,11 +28,16 @@ ratpack {
 	//////////////////////////////////////////////
 
     get("api/questions/random/:amount") {
-		render getRandomQuestions(request.queryParams.amount)  
+		int amount = 5
+		def amountString = DataService.getPathId(request.path)
+		if (amountString) {
+			amount = amountString.toInteger()
+		}
+		render getRandomQuestions(amount)  
 	}
 
-	get("api/questions/random1") {
-		render getRandomQuestion()
+	get("api/questions/random") {
+		redirect "random/5"
 	}
 
 	post("api/questions/new") {
@@ -43,21 +48,32 @@ ratpack {
 	}
 
 	get('api/question/:id') { 
-		response.send('application/json', getQuestion(request.queryParams.id))
+		def idString = DataService.getPathId(request.path)
+		response.send('application/json', getQuestion(idString))
 	}
 
 	delete('api/question/:id') {
-		deleteQuestion(request.queryParams.id)
+		def id = DataService.getPathId(request.path)
+		deleteQuestion(id)
 		render '{ "response": "OK" }'
 	}
 
 	put('api/question/:id') {
-		DataService.updateQuestion(request.queryParams.id)
+		def id = DataService.getPathId(request.path)
+		DataService.updateQuestion(id)
 		render '{ "response": "OK" }'
 	}
-	
+
+	post("api/answers/new") {
+		def answer = new JsonSlurper().parseText(request.text)
+		println "Answer to insert: ${answer}"
+		insertAnswer(answer)
+		render '{ "response": "OK" }'
+	}
+		
 	get("api/image/:id") {
-		def file = new File("${FILE_STORAGE}/${request.queryParams.id}")
+		def id = DataService.getPathId(request.path)
+		def file = new File("${FILE_STORAGE}/${id}")
 		if (!file.exists()) {
 			response.status(404) 	
 			render '{ "response": "Not Found" }'
@@ -67,7 +83,8 @@ ratpack {
     }
 
 	post("api/image/:id") {
-		def file = new File("${FILE_STORAGE}/${request.queryParams.id}")
+		def id = DataService.getPathId(request.path)
+		def file = new File("${FILE_STORAGE}/${id}")
 		file.withOutputStream { stream ->
 			request.writeBodyTo(stream)
 		}		

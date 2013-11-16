@@ -15,6 +15,10 @@ class DataService {
 
 	static getRandomQuestion() {
 		getRandomQuestions(1)
+	}
+	
+	static getPathId(String path) {
+		path.split('/').last()
 	}		
 	
 	static getRandomQuestions(limit) {
@@ -22,7 +26,14 @@ class DataService {
 		db.questions.find().limit(limit).sort('_random': 1).each { question ->
 			question.remove('_random')
 			response.questions << question
-		}
+			db.answers.group([question_id: true], [:], [count: 0], "function(doc, out) { out.count += 1 }").each { answerStats ->
+			  question.answers.each { answer ->
+				  if (answerStats.title == answer.title) {
+					  answer.value = answerCount.count 
+				  }				  
+			  }
+		    }
+		}		
 		produceJson(response)
 	}
 
@@ -30,6 +41,11 @@ class DataService {
 		question.'_id' = UUID.randomUUID()
 		question.'_random' =  (Integer) (Math.random() * 100)
 		db.questions.insert(question)
+	}
+
+	static insertAnswer(answer) {
+		answer.'_id' = UUID.randomUUID()
+		db.answers.insert(answer)
 	}
 
 	static updateQuestion(question) {
