@@ -24,7 +24,7 @@ class DataService {
 	static getRandomQuestions(limit) {
 		def response = [questions: []]
 		db.questions.find().limit(limit).sort('_random': 1).each { question ->
-			question.remove('_random')			
+			question.remove('_random')						
 			db.answers.aggregate(
 			  [
 				$project : [ title: 1, question_id: 1 ]
@@ -37,14 +37,19 @@ class DataService {
 			  ]
 			).results().each { answerStats ->
 			  question.answers.each { answer ->
-				  if (answer.value == null) {
-					 answer.value = 0
+				  if (!answer.value) {
+					 answer.value = "0"
 				  } 
 				  if (answerStats._id.title == answer.title) {
 					  answer.value = answerStats.count
 				  }
 			  }
 			} 
+			question.answers.each { answer ->
+				if (!answer.value) {
+				   answer.value = "0"
+				}
+			}
 			response.questions << question
 		}		
 		produceJson(response)
