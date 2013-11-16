@@ -1,0 +1,236 @@
+/*-----------------------------------------------------------------------------------
+
+Theme Name: 
+Author: Teodors Zeltiņš
+Author URI: http://teodors.lv
+Description: 
+Version: 1.0
+
+-------------------------------------------------------------------------------------
+
+  0.  CSS Reset
+  1.  Document Setup
+  2.  Footer Styles
+  3.  Content
+  4.  Statistics Generator
+
+-----------------------------------------------------------------------------------*/
+
+
+/*-----------------------------------------------------------------------------------
+  0.  Eric Meyer's Reset CSS v2.0 - http://cssreset.com
+-----------------------------------------------------------------------------------*/
+
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,footer,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0;outline:0}article,aside,details,figcaption,figure,footer,footer,hgroup,menu,nav,section{display:block}body{line-height:1.5}ol,ul{list-style:none}blockquote,q{quotes:none}:focus{outline:0}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
+
+
+/*-----------------------------------------------------------------------------------
+  1.  Document Setup
+-----------------------------------------------------------------------------------*/
+
+* {
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box
+}
+html {
+  height: 100%;
+}
+body { 
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -khtml-font-smoothing: antialiased;
+  background: #ccc;
+  color: #555;
+  position: relative;
+  height: 100%;
+  font-size: 14px;
+}
+body, img {  /* Resizing Transitions, for Responsive demo */
+  transition:all .2s ease-in-out;  
+  -o-transition:all .2s ease-in-out;  
+  -moz-transition:all .2s ease-in-out;  
+  -webkit-transition:all .2s ease-in-out; 
+}
+a {
+  color: #3777C0;
+  text-decoration: none;
+  display: inline-block;
+}
+}
+h1 {
+  height: 14px;
+  font-weight: bold;
+}
+
+/*-----------------------------------------------------------------------------------
+  2.  Navigation
+-----------------------------------------------------------------------------------*/
+
+nav#main-nav {
+  height: 40px;
+  background: #fff;
+  display: block;
+}
+nav#main-nav #author span {
+  font-weight: bold;
+}
+nav#main-nav #author {
+  float: left;
+  margin: 0 0 0 20px;
+}
+nav#main-nav #time {
+  margin: 0 20px 0 0;
+  float: right;
+  font-style: italic;
+  color: #aaaaaa;
+}
+nav#main-nav p {
+  line-height: 40px;
+}
+nav#main-nav #author img {
+  font-weight: bold;
+  width: 26px;
+  height: 26px;
+  background: #b9b9ba;
+  display: block;
+  overflow: hidden;
+  border-radius: 13px;
+}
+
+/*-----------------------------------------------------------------------------------
+  3.  Content
+-----------------------------------------------------------------------------------*/
+#container {
+  width: 320px;
+  height: 568px;
+  display: block;
+  margin: -284px -160px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: #fff;
+}
+#content {
+  overflow: hidden;
+}
+.qmeta {
+  display: block;
+  height: 320px;
+  width: 100%;
+}
+h1#qtitle {
+  position: absolute;
+  top: 150px;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  width: 100%;
+}
+.answers span {
+  margin: 10px 15px 0 0;
+  width: 20px;
+  height: 20px;
+  background: red;
+  display: block;
+  float: left;
+}
+.qthumb {
+  display: block;
+  background: #b9b9ba;
+  width: 320px;
+  height: 280px;
+}
+.qplace li {
+  height: 42px;
+  width: 100%;
+  border-bottom: 1px solid #B9B9BA;
+  background: #fff;
+  line-height: 42px;
+}
+.qplace li input {
+  display: none;
+}
+.qplace li label {
+  background: url(img/unchecked.png) 20px 11px no-repeat;
+  width: 100%;
+  height: 42px;
+  display: block;
+  cursor: pointer;
+  padding: 0 55px;
+}
+.qplace li input:checked + label {
+  background: url(img/checked.png) 20px 11px no-repeat;
+}
+
+/*-----------------------------------------------------------------------------------
+  4.  Footer
+-----------------------------------------------------------------------------------*/
+
+footer {
+  height: 60px;
+  width: 100%;
+  background: #444;
+  position: absolute;
+  bottom: 0px;
+  display: block;
+  overflow: hidden;
+}
+#footer-nav {
+  width: 100%;
+}
+#footer-nav li {
+  float: left;
+  display: block;
+  height: 60px;
+  line-height: 40px;
+  width: 25%;
+}
+#footer-nav li a {
+  text-align: center;
+  height: 40px;
+  margin: 10px 0;
+  color: #fff;
+  font-weight: bold;
+  font-size: 13px;
+  display: block;
+  background: #614ed1;
+  text-transform: uppercase;
+}
+#footer-nav li#answer {
+  width: 50%;
+  background: #8bce5f;
+}
+#footer-nav li#answer a {
+  background: #77bc4a;
+  margin-right: 10px;
+  border-radius: 0 4px 4px 0;
+}
+#footer-nav li#ask {
+  background: #766dc6;
+}
+#footer-nav li#ask a {
+  background: #625f99;
+}
+#footer-nav li#me a {
+  background: #2b2b2b;
+  margin-left: 10px;
+  border-radius: 4px 0 0 4px;
+}
+#footer-nav li a:hover {
+  background: #fff;
+}
+
+
+/*-----------------------------------------------------------------------------------
+  5.  Media Queries
+-----------------------------------------------------------------------------------*/
+
+@media (max-width: 420px) {
+  #device-display > li {
+    width: 50%;
+    height: 25%;
+  }
+}

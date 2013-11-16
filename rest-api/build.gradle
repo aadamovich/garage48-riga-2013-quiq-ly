@@ -52,18 +52,6 @@ project.ext {
     [ 
       _id: UUID.randomUUID().toString(),
       _random: (Integer) (Math.random() * 100),
-      title: 'What is your role at Garage48?', 
-      answers: [
-        [ title: 'Visionary' ],
-        [ title: 'Marketer' ],
-        [ title: 'Designer' ],
-        [ title: 'Developer' ],
-        [ title: 'Miley Cyrus' ],
-      ]
-    ],
-    [ 
-      _id: UUID.randomUUID().toString(),
-      _random: (Integer) (Math.random() * 100),
       title: 'Which of these languages can you use?', 
       answers: [
         [ title: 'Ruby' ],

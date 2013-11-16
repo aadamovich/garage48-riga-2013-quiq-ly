@@ -8,53 +8,65 @@ import com.mongodb.DB
 class DataService {
 
 	static final FILE_STORAGE = '/var/lib/tellme/storage'
+	static final Random RNG = new Random() 
 	
 	static getQuestion(String id) {
 		produceJson(db.questions.findOne('_id': id))
 	}
 
-	static getRandomQuestion() {
-		getRandomQuestions(1)
-	}
-	
 	static getPathId(String path) {
 		path.split('/').last()
 	}		
 	
 	static getRandomQuestions(limit) {
 		def response = [questions: []]
-		db.questions.find().limit(limit).sort('_random': 1).each { question ->
-			question.remove('_random')						
-			db.answers.aggregate(
-			  [
-				$project : [ title: 1, question_id: 1 ]
-			  ],
-			  [
-				$match : [ question_id: question._id ]
-			  ],
-		      [
-				$group: [ _id : [ question_id: '$question_id', title: '$title'], count: [ $sum: 1 ] ]   
-			  ]
-			).results().each { answerStats ->
-			  question.answers.each { answer ->
-				  if (answerStats._id.title == answer.title) {
-					  answer.value = answerStats.count
-				  }
-			  }
-			} 
-			question.answers.each { answer ->
-				if (!answer.value) {
-				   answer.value = 0
-				}
-			}
+		db.questions.find().limit(limit).each { question ->
+			question.remove('_random')		
+			getAnswerStats(question)				
 			response.questions << question
 		}		
 		produceJson(response)
 	}
 
+	static getRandomQuestion() {
+		int questionCount = db.questions.count()
+		def question = null
+		db.questions.find().limit(1).skip(RNG.nextInt(questionCount)).each {
+		  question = it
+		  question.remove('_random')
+		  getAnswerStats(question)
+		}
+		question
+	}	
+
+	static private getAnswerStats(question) {
+		db.answers.aggregate(
+			[
+			  $project : [ title: 1, question_id: 1 ]
+			],
+			[
+			  $match : [ question_id: question._id ]
+			],
+			[
+			  $group: [ _id : [ question_id: '$question_id', title: '$title'], count: [ $sum: 1 ] ]
+			]
+		  ).results().each { answerStats ->
+			question.answers.each { answer ->
+				if (answerStats._id.title == answer.title) {
+					answer.value = answerStats.count
+				}
+			}
+		  }
+		  question.answers.each { answer ->
+			  if (!answer.value) {
+				 answer.value = 0
+			  }
+		  }
+	}
+
 	static insertQuestion(question) {
 		question.'_id' = UUID.randomUUID().toString()
-		question.'_random' =  (Integer) (Math.random() * 100)
+		question.'_random' = (Integer) (Math.random() * 100)
 		db.questions.insert(question)
 	}
 
