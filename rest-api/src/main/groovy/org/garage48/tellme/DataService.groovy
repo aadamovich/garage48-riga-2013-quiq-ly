@@ -7,23 +7,28 @@ import com.mongodb.DB
 
 class DataService {
 
+	static final FILE_STORAGE = '/var/lib/tellme/storage'
+	
 	static getQuestion(String id) {
-		produceJson(db.questions.findOne(id: id))
+		produceJson(db.questions.findOne('_id': id))
 	}
 
 	static getRandomQuestion() {
-		produceJson(db.questions.findOne())
+		getRandomQuestions(1)
 	}		
 	
 	static getRandomQuestions(limit) {
 		def response = [questions: []]
-		db.questions.find().each {
-			response.questions << it
+		db.questions.find().limit(limit).sort('_random': 1).each { question ->
+			question.remove('_random')
+			response.questions << question
 		}
 		produceJson(response)
 	}
 
 	static insertQuestion(question) {
+		question.'_id' = UUID.randomUUID()
+		question.'_random' =  (Integer) (Math.random() * 100)
 		db.questions.insert(question)
 	}
 
@@ -32,15 +37,15 @@ class DataService {
 	}
 
 	static deleteQuestion(String id) {
-		db.questions.remove(id: id)
+		db.questions.remove('_id': id)
 	}
 		
-	static DB getDb() {
+	private static DB getDb() {
 		def mongo = new GMongo()
 		mongo.getDB('tell-me')
 	}
 	
-	static produceJson(content) {
+	private static produceJson(content) {
 		content ? new JsonBuilder(content).toString() : '{ "response": "no-data" }'
 	}
 	

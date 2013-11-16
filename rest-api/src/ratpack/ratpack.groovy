@@ -1,9 +1,11 @@
-import static ratpack.groovy.Groovy.*
 import static org.garage48.tellme.DataService.*
-import groovy.json.JsonSlurper;
+import static ratpack.groovy.Groovy.*
+
+import groovy.json.JsonSlurper
+
+import org.garage48.tellme.*
 
 import ratpack.groovy.templating.*
-import org.garage48.tellme.*
 
 ratpack {
 
@@ -55,10 +57,20 @@ ratpack {
 	}
 	
 	get("api/image/:id") {
-		render '{ "response": "OK" }'
+		def file = new File("${FILE_STORAGE}/${request.queryParams.id}")
+		if (!file.exists()) {
+			response.status(404) 	
+			render '{ "response": "Not Found" }'
+		} else {
+		 	render file
+		}
     }
 
 	post("api/image/:id") {
+		def file = new File("${FILE_STORAGE}/${request.queryParams.id}")
+		file.withOutputStream { stream ->
+			request.writeBodyTo(stream)
+		}		
 		render '{ "response": "OK" }'
 	}
 
