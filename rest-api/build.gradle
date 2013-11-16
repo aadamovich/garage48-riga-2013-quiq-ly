@@ -145,7 +145,7 @@ task insertData << {
 insertData.mustRunAfter cleanDb
 
 task insertHttpData << {
-  getData().each { question ->
+  questions.each { question ->
     def request = new JsonBuilder(question).toString()
     getHttp('api/questions/new').request(POST, JSON) { req ->
       body = request

@@ -1,0 +1,1 @@
+wget -k -O response.json --post-file=image123.png  http://localhost:5050/api/images/new 
