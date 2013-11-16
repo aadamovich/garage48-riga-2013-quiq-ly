@@ -21,5 +21,6 @@ configurations.all {
 }
 
 dependencies {
-  springloaded "org.springsource.springloaded:springloaded-core:1.1.4"
+  springloaded 'org.springsource.springloaded:springloaded-core:1.1.4'
+  compile 'com.gmongo:gmongo:1.0'
 }
