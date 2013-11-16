@@ -1,3 +1,12 @@
+import groovy.json.JsonBuilder
+
+import com.gmongo.GMongo
+import com.mongodb.DB
+
+import groovyx.net.http.HTTPBuilder
+import static groovyx.net.http.ContentType.*
+import static groovyx.net.http.Method.*
+
 buildscript {
   repositories {
     maven { url "http://oss.jfrog.org/repo" }
@@ -5,7 +14,20 @@ buildscript {
   }
   dependencies {
     classpath 'io.ratpack:ratpack-gradle:0.9.0-SNAPSHOT'
+    classpath 'com.gmongo:gmongo:1.0'
+    classpath 'org.codehaus.groovy.modules.http-builder:http-builder:0.6'
   }
+}
+
+project.ext {
+  local = [
+    database : 'localhost:27017',
+    api : 'http://localhost:5050'
+  ]
+  production = [
+    database: 'ec2-54-217-31-12.eu-west-1.compute.amazonaws.com:27017',
+    api: 'http://ec2-54-217-31-12.eu-west-1.compute.amazonaws.com:5050'
+  ]
 }
 
 repositories {
@@ -23,4 +45,74 @@ configurations.all {
 dependencies {
   springloaded 'org.springsource.springloaded:springloaded-core:1.1.4'
   compile 'com.gmongo:gmongo:1.0'
+  compile 'org.codehaus.groovy:groovy-all:2.1.9'
+  testCompile 'junit:junit:4.11'
+  testCompile 'com.jayway.restassured:rest-assured:1.8.1'
+}
+
+test.onlyIf { false }
+
+task cleanDb << {
+  getDb().questions.drop()
+}
+
+task insertData << {
+  getData().each { question ->
+    def request = new JsonBuilder(question).toString()
+    getDb().questions.insert(question)
+  }
+}
+
+insertData.mustRunAfter cleanDb
+
+task insertHttpData << {
+  getData().each { question ->
+    def request = new JsonBuilder(question).toString()
+    getHttp().request(POST, JSON) { req ->
+      body = question
+      response.success = { resp, json ->
+      }
+    }
+  }
+}
+
+
+task deploy(dependsOn: distZip) << {
+  // TODO: stop server
+  // TODO: upload data
+  // TODO: upload code
+  // TODO: start server
+}
+
+def getDb() {
+  def mongo = new GMongo()
+  mongo.getDB('tell-me')
+}
+
+def getHttp() {
+  new HTTPBuilder('http://localhost:2000')
+}
+
+def getData() {
+  [
+    [ 
+      title: 'Which colour of shoes is gonna be trending in S/S 2014?',
+      answers: [
+        [ title: 'Red', value: '13' ],
+        [ title: 'Orange', value: '3' ],
+        [ title: 'Blue', value: '36' ],
+        [ title: 'Black', value: '48' ],
+      ]
+    ],
+    [ 
+      title: 'What is your role at Garage48?', 
+      answers: [
+        [ title: 'Visionary', value: '15' ],
+        [ title: 'Marketer', value: '17' ],
+        [ title: 'Designer', value: '30' ],
+        [ title: 'Developer', value: '47' ],
+        [ title: 'Miley Cyrus', value: '1' ],
+      ]
+    ],
+  ]
 }

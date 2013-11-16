@@ -1,0 +1,1 @@
+wget -k -O response.json --post-file=question.json  http://localhost:2000/api/questions/new 
