@@ -37,9 +37,6 @@ class DataService {
 			  ]
 			).results().each { answerStats ->
 			  question.answers.each { answer ->
-				  if (!answer.value) {
-					 answer.value = "0"
-				  } 
 				  if (answerStats._id.title == answer.title) {
 					  answer.value = answerStats.count
 				  }
@@ -47,7 +44,7 @@ class DataService {
 			} 
 			question.answers.each { answer ->
 				if (!answer.value) {
-				   answer.value = "0"
+				   answer.value = 0
 				}
 			}
 			response.questions << question
