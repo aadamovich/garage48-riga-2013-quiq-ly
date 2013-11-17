@@ -41,17 +41,6 @@ project.ext {
     [ 
       _id: UUID.randomUUID().toString(),
       _random: (Integer) (Math.random() * 100),
-      title: 'Which colour of shoes is gonna be trending in S/S 2014?',
-      answers: [
-        [ title: 'Red' ],
-        [ title: 'Orange' ],
-        [ title: 'Blue' ],
-        [ title: 'Black' ],
-      ]
-    ],
-    [ 
-      _id: UUID.randomUUID().toString(),
-      _random: (Integer) (Math.random() * 100),
       title: 'Which of these languages can you use?', 
       answers: [
         [ title: 'Ruby' ],
@@ -63,32 +52,12 @@ project.ext {
     [ 
       _id: UUID.randomUUID().toString(),
       _random: (Integer) (Math.random() * 100),
-      title: 'What did you have for dinner yesterday?', 
-      answers: [
-        [ title: 'Cheese salad' ],
-        [ title: 'Cheese salad (2 hours old)' ],
-        [ title: 'Cheese salad (5 hours old)' ],
-        [ title: 'Red Bull' ],
-      ]
-    ],
-    [ 
-      _id: UUID.randomUUID().toString(),
-      _random: (Integer) (Math.random() * 100),
       title: 'What did you have dreams about last night?', 
       answers: [
-        [ title: 'Cheese salad' ],
-        [ title: 'Female designers' ],
-        [ title: 'Nokia Lumias and iPads' ],
-        [ title: 'Miley Cyrus' ],
-      ]
-    ],
-    [ 
-      _id: UUID.randomUUID().toString(),
-      _random: (Integer) (Math.random() * 100),
-      title: 'Did you sleep last night?', 
-      answers: [
-        [ title: 'Hell yeah' ],
-        [ title: 'Not really' ],
+        [ title: 'Female designers', image: '' ],
+        [ title: 'Two pancakes', image: '' ],
+        [ title: 'iPads', image: '' ],
+        [ title: 'Miley Cyrus', image: '' ],
       ]
     ],
   ]

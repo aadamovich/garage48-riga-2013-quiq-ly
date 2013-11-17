@@ -1,18 +1,7 @@
 jQuery(document).ready(function() { 
 
-	$('#pick-answer label').click(function(){
-		$('#content').animate({
-		  left : -100 + "%"
-		}, 1000, function() {
-			answerQuestion();
-			drawChart(getData());			
-			$('.result').fadeIn();
-			$('#content').css("left", "0%");
-			$('#qplace').css("left", "50%");
-			$('#qgraph').css("left", "0");
-		});
-	});
-
+	addChoiceHandler();
+	
 	$('#next-question').click(function(){
 		$('#content').animate({
 		  left : -100 + "%"
@@ -24,7 +13,7 @@ jQuery(document).ready(function() {
 			$('#qgraph').css("left", "50%");
 		});
 	});
-
+	
 	$('#back a').click(function(){
 		var activeSlide = $(this).attr('data-slide');
 
@@ -123,29 +112,32 @@ function drawChart(data) {
 
 }
 
-
-// Something happens here.
 function getData() {
-	var data = [
-		{
-			value: 30,
-			color:"#F7464A"
-		},
-		{
-			value : 50,
-			color : "#E2EAE9"
-		},
-		{
-			value : 100,
-			color : "#D4CCC5"
-		},
-		{
-			value : 40,
-			color : "#949FB1"
-		},
-	];
+    var data = []
+    $.each( $('#pick-answer li'), function(index, item) {
+        data.push({
+        value: parseInt($(item).children('input[type=radio]').attr('data-value')),
+        color: $(item).children('input[type=radio]').attr('data-color')                    
+        })
+    });        
+    return data;
+}  
 
-	return data;
+function addChoiceHandler() {
+	
+	$('#pick-answer label').click(function(){
+		$('#content').animate({
+		  left : -100 + "%"
+		}, 1000, function() {
+			answerQuestion();
+			drawChart(getData());			
+			$('.result').fadeIn();
+			$('#content').css("left", "0%");
+			$('#qplace').css("left", "50%");
+			$('#qgraph').css("left", "0");
+		});
+	});
+	
 }
 
 function addNewInput() {
@@ -160,21 +152,17 @@ function addNewInput() {
 }
 
 function preview(input) {
-    if (input.files && input.files[0]) {
-    	
+    if (input.files && input.files[0]) {    	
         var reader = new FileReader();
-
         reader.onload = function (e) {
             $('#preview-uploadd')
                 .attr('src', e.target.result)
                 .width(100)
                 .height(120);
         };
-
         reader.readAsDataURL(input.files[0]);
     }
 }
-
 
 function slideChart() {
 	$('#content').animate({ left : "-100%" }, 1000, function() { drawChart(getData()); } );	
@@ -191,7 +179,7 @@ function answerQuestion() {
 	  data: 
 		'{ ' +
 		   '"question_id": "' + $('#question_id').val() + '",' +
-		   '"title": "' + $('.answers input').filter(':checked').val() + '"' + 
+		   '"title": "' + $('#pick-answer input').filter(':checked').val() + '"' + 
 		'}',
 	  dataType: "json"
 	});
@@ -243,14 +231,19 @@ function loadQuestion() {
   $.getJSON( "/api/questions/random1", function(data) {
 	  $('#question_id').val(data._id);
 	  $('#qplace #qtitle h1').text(data.title);
-	  var newAnswers = '<ul class="pick-answer">'
+	  $('#participant-count').text(data.total);
+	  var newAnswers = '<ul id="pick-answer">'
 	  for (var i = 0; i < data.answers.length; i++) {
 		  var answer = data.answers[i].title
 		  var color = data.answers[i].color
 		  var value = data.answers[i].value		  
-		  newAnswers += '<li><input type="radio" value="' + answer + '" id="' + answer + '" name="select" data-color="' + color + '" data-value="' + value + '"><label for="' + answer + '">' + answer + '</label></li>'
+		  newAnswers += '<li id="' + i + '_answer">' + 
+		                '<p>' + answer + '</p>' + 
+		                '<input type="radio" value="' + answer + '" id="' + i + '_title" name="select" data-color="' + color + '" data-value="' + value + '">' + 
+		                '<label for="' + i + '_title"></label></li>'
 	  }
-	  newAnswers += '</ul>' 
-       $('#pick-answer').replaceWith(newAnswers) 
+	  newAnswers += '</ul>'; 
+      $('#pick-answer').replaceWith(newAnswers);
+      addChoiceHandler();       
   })
 }

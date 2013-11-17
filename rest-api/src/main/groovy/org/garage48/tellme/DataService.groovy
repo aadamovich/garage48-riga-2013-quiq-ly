@@ -50,7 +50,6 @@ class DataService {
 	static private enrichQuestion(question) {
 		def colors = [ "#F7464A", "#E2EAE9", "#D4CCC5", "#949FB1", "#4D5360" ]
 		def colorCounter = 0
-		question.remove('_random')
 		db.answers.aggregate(
 			[
 			  $project : [ title: 1, question_id: 1 ]
