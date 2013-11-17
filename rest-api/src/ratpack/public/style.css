@@ -1,7 +1,7 @@
 /*-----------------------------------------------------------------------------------
 
 Theme Name: 
-Author: Teodors Zeltins
+Author: Teodors Zeltiņš
 Author URI: http://teodors.lv
 Description: 
 Version: 1.0
@@ -29,22 +29,22 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 -----------------------------------------------------------------------------------*/
 @font-face {
     font-family: 'Quicksand Bold';
-    src: url('/fonts/quicksand-bold-webfont.eot');
-    src: url('/fonts/quicksand-bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/fonts/quicksand-bold-webfont.woff') format('woff'),
-         url('/fonts/quicksand-bold-webfont.ttf') format('truetype'),
-         url('/fonts/quicksand-bold-webfont.svg#quicksandbold') format('svg');
+    src: url('fonts/quicksand-bold-webfont.eot');
+    src: url('fonts/quicksand-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/quicksand-bold-webfont.woff') format('woff'),
+         url('fonts/quicksand-bold-webfont.ttf') format('truetype'),
+         url('fonts/quicksand-bold-webfont.svg#quicksandbold') format('svg');
     font-weight: bold;
     font-style: normal;
 
 }
 @font-face {
     font-family: 'Quicksand Regular';
-    src: url('/fonts/quicksand-regular-webfont.eot');
-    src: url('/fonts/quicksand-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/fonts/quicksand-regular-webfont.woff') format('woff'),
-         url('/fonts/quicksand-regular-webfont.ttf') format('truetype'),
-         url('/fonts/quicksand-regular-webfont.svg#quicksandregular') format('svg');
+    src: url('fonts/quicksand-regular-webfont.eot');
+    src: url('fonts/quicksand-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/quicksand-regular-webfont.woff') format('woff'),
+         url('fonts/quicksand-regular-webfont.ttf') format('truetype'),
+         url('fonts/quicksand-regular-webfont.svg#quicksandregular') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -62,7 +62,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
   -khtml-font-smoothing: antialiased;
-  background: #ccc;
+  background: #137470 url(img/landing.png) center center no-repeat;
   color: #555;
   position: relative;
   height: 100%;
@@ -89,8 +89,64 @@ h1 {
   2.  Navigation
 -----------------------------------------------------------------------------------*/
 
+input#rate, input#email {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+input#rate {
+  height: 42px;
+  margin: -25px 0 0 216px;
+  width: 105px;
+  border: none;
+  background: transparent;
+  font-size: 34px;
+  color: #fff;
+  font-family: "Quicksand Bold";
+  padding: 0 10px;
+  text-align: center;
+}
+input#email {
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+  border: medium none;
+  color: #FFFFFF;
+  font-family: "Quicksand Bold";
+  height: 42px;
+  margin: 137px 0 0 136px;
+  padding: 0 10px;
+  text-align: center;
+  width: 190px;
+}
+#social-icons {
+  width: 225px;
+  height: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 37px 0 0 180px;
+}
+#social-icons li {
+  float: left;
+  margin: 0;
+}
+#social-icons li a {
+  text-indent: -9999px;
+  overflow: hidden;
+  width: 50px;
+  height: 50px;
+  display: block;  
+}
+#social-icons li#twitter a {
+  background: url(img/twitter.png) no-repeat;
+}
+#social-icons li#facebook a {
+  background: url(img/facebook.png) no-repeat;
+}
+#social-icons li#pinterest a {
+  background: url(img/pinterest.png) no-repeat;
+}
 #status-bar {
-  background: url(/img/status-bar.png) no-repeat;
+  background: url(img/status-bar.png) no-repeat;
   width: 100%;
   height: 20px;
   display: block;
@@ -186,7 +242,7 @@ nav#main-nav #author img {
   width: 320px;
   height: 568px;
   display: block;
-  margin: -284px -160px;
+  margin: -284px -460px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -200,7 +256,7 @@ nav#main-nav #author img {
   height: 455px;
   position: relative;
 }
-#qplace, #qgraph, #qask1, #qask2, #qask3 {
+#qplace, #qplacepic, #qgraph, #qask1, #qask2, #qask3 {
   width: 50%;
   height: 468px;
   overflow: auto;
@@ -208,8 +264,11 @@ nav#main-nav #author img {
   float: left;
   position: absolute;
 }
-#qgraph {
+#qplacepic {
   left: 50%;
+}
+#qgraph {
+  left: 100%;
 }
 #qplace {
   left: 0;
@@ -261,7 +320,7 @@ nav#main-nav #author img {
   border: 3px dashed #ccc;
   border-radius: 3px;
   text-indent: -9999px;
-  background: url(/img/camera.png) center center no-repeat;
+  background: url(img/camera.png) center center no-repeat;
 }
 .qmeta {
   display: block;
@@ -296,6 +355,9 @@ nav#main-nav #author img {
   line-height: 1.5;
   text-transform: uppercase;
 }
+#qplacepic #qtitle h1 {
+  color: #565656;
+}
 #myChart {
   position: absolute;
   left: 50%;
@@ -314,7 +376,7 @@ nav#main-nav #author img {
   height: 100%;
 }
 span#shadow {
-  background: url(/img/drop-shadow.png) top center repeat-x;
+  background: url(img/drop-shadow.png) top center repeat-x;
   display: block;
   position: absolute;
   top: 0;
@@ -324,7 +386,7 @@ span#shadow {
   opacity: 0.6;
 }
 span#answer {
-  background: url(/img/answer.png) top center no-repeat;
+  background: url(img/answer.png) top center no-repeat;
   position: absolute;
   top: 35px;
   right: 43px;
@@ -334,7 +396,7 @@ span#answer {
   cursor: pointer;
 }
 #next-question {
-  background: url(/img/answer-blue.png) top center no-repeat;
+  background: url(img/answer-blue.png) top center no-repeat;
   position: absolute;
   top: 35px;
   right: 43px;
@@ -344,7 +406,20 @@ span#answer {
   cursor: pointer;
 }
 #pick-answer {
-  margin: 21px 0 0 0;
+  margin: 21px 0 0;
+}
+#qplace #pick-answer {
+  height: 191px;
+  overflow: auto;
+}
+#qplacepic  #pick-answer {
+  margin: 0;
+}
+#qplacepic #pick-answer {
+  position: absolute;
+  top: 135px;
+  left: 0;
+  width: 100%;
 }
 #pick-answer li {
   padding: 0 35px 0 40px;
@@ -352,7 +427,35 @@ span#answer {
   height: 34px;
   width: 100%;
   line-height: 34px;
-
+}
+#qplacepic #pick-answer li {
+  width: 160px;
+  height: 160px;
+  overflow: hidden;
+  position: relative;
+  float: left;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+}
+#qplacepic #pick-answer li p, #qplacepic #pick-answer li label, #qplacepic #pick-answer li .up-shadow {
+  position: absolute;
+}
+#qplacepic #pick-answer li label {
+  top: 10px;
+  right: 10px;
+}
+#qplacepic #pick-answer li p {
+  vertical-align: bottom;
+  width: 100%;
+  padding: 0 10px;
+  text-align: center;
+  font-size: 18px;
+  color: #fff;
+  bottom: 15px;
+  line-height: 1.1;
+  z-index: 100;
 }
 #pick-answer li p {
   float: left;
@@ -362,9 +465,23 @@ span#answer {
 #pick-answer li input {
   display: none;
 }
+#qplacepic #pick-answer li label {
+  border: 2px solid #fff;
+  background: transparent;
+  z-index: 100;
+}
+#qplacepic #pick-answer li .up-shadow {
+    background: url(img/up-shadow.png) center bottom no-repeat;
+    width: 160px;
+    height: 160px;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
+    z-index: 1;
+}
 #pick-answer li label {
   background: #fff;
-  border: 1px solid #45aca9;
+  border: 2px solid #45aca9;
   border-radius: 17px;
   width: 34px;
   height: 34px;
@@ -372,8 +489,9 @@ span#answer {
   cursor: pointer;
   float: right;
 }
-#pick-answer li input:checked + label {
-  background: #45aca9 url(/img/tick.png) center center no-repeat;
+#pick-answer li input:checked + label, #qplacepic #pick-answer li input:checked + label {
+  background: #45aca9 url(img/tick.png) center center no-repeat;
+  border-color: #45aca9;
 }
 .result {
   position: absolute;
@@ -455,7 +573,7 @@ footer {
 #footer-nav li#menu a {
   text-indent: -9999px;
   padding: 0;
-  background: url(/img/menu.png) center center no-repeat;
+  background: url(img/menu.png) center center no-repeat;
 }
 #footer-nav li:hover {
   background: #2b928f;

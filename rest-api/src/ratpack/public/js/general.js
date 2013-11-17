@@ -1,7 +1,49 @@
 jQuery(document).ready(function() { 
 
 	addChoiceHandler();
-	
+
+	$('#rate').focusout(function(){
+		rate();
+		if($(this).val() == 0) $(this).val("1-10");
+	});
+
+	$('#email').click(function(){
+		$(this).val("");
+	});
+
+	$('#rate').click(function(){
+		$(this).val("");
+	});
+
+	$('#email').focusout(function(){
+		subscribe();
+		if($(this).val() == 0) $(this).val("Enter e-mail here!");
+	});
+
+	function rate() {
+	  $.ajax({
+		  type: "POST",
+		  url: "/api/rate",
+		  data: 
+			'{ ' +
+			   '"rate": "' + $('#rate').val() + '",' +
+			'}',
+		  dataType: "json"
+		});
+	}
+
+	function subscribe() {
+	  $.ajax({
+		  type: "POST",
+		  url: "/api/subscribe",
+		  data: 
+			'{ ' +
+			   '"email": "' + $('#subscribe_email').val() + '",' +
+			'}',
+		  dataType: "json"
+		});
+	}
+		
 	$('#next-question').click(function(){
 		$('#content').animate({
 		  left : -100 + "%"

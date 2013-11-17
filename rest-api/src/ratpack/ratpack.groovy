@@ -16,24 +16,12 @@ ratpack {
 	//////////////////////////////////////////////
 	  
 	get {
-		render groovyTemplate('landing.html')
+		render groovyTemplate('answer.html', question: getRandomQuestion())
 	}
 	  
-	get("question/random") {
-		render groovyTemplate('answer.html', question: getRandomQuestion())
-	}		
-
-	get("question/ask") {
-		render groovyTemplate('ask.html')
-	}
-
 	get("questions/:id") {
 		def id = DataService.getPathId(request.path)
 		render groovyTemplate('answer.html', question: getQuestion(id))
-	}
-
-	get("profile") {
-		render groovyTemplate('profile.html')
 	}
 
 	get("channel") {
