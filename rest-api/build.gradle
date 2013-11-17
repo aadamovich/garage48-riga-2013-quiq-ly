@@ -154,8 +154,8 @@ task deploy(dependsOn: distZip) << {
         remoteDir "/tmp"
       }
     }
-    exec(command: 'sudo mkdir -p /var/lib/tellme/storage', failOnError: false)
     exec(command: 'sudo rm -rf /var/lib/tellme/*', failOnError: false)  
+    exec(command: 'sudo mkdir -p /var/lib/tellme/storage', failOnError: false)
     exec 'sudo unzip /tmp/rest-api.zip -d /var/lib/tellme'
     exec 'sudo chown -R ubuntu:ubuntu /var/lib/tellme'
     exec 'cd /var/lib/tellme/rest-api/bin ; nohup sudo -b ./rest-api > /var/lib/tellme/rest-api/server.log'
