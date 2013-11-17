@@ -284,7 +284,7 @@ function loadQuestion() {
 		                '<p>' + answer + '</p>' + 
 		                '<input type="radio" value="' + answer + '" id="' + i + '_title" name="select" data-color="' + color + '" data-value="' + value + '">' + 
 		                '<label for="' + i + '_title"></label></li>'
-		  newLabels += '<li id="result' + (i+1) + '" class="result"><h2>' + answer + '</h2><span>' + answer + '</span></li>'              
+		  newLabels += '<li id="result' + (i+1) + '" class="result"><h2>' + value + '</h2><span>' + answer + '</span></li>'              
 	  }
 	  newAnswers += '</ul>'; 
 	  newAnswers += '</ul></div>';              
