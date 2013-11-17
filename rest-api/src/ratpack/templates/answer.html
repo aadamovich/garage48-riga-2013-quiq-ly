@@ -17,41 +17,59 @@
 </head>
 <body>
 
+
   <div id="container">
-  
     <nav id="main-nav">
-      <p id="author">Asked by: <span>Quiqly</span></p>
-      <p id="time">just now</p>
-      <span id="tick"></span>
+      <div id="status-bar"></div>
+      <div id="author">
+        <img src="/img/upload/girl.png" alt="Girl"/>
+        <p>Asked by: <span>Laura Green</span></p>
+      </div>
     </nav>
     
     <div id="content">
       <div id="qplace">
-        <div id="qtitle"><h1>${model.question.title}</h1></div>
-        <img src="" class="qthumb">
-        <input id="question_id" type="hidden" value="${model.question._id}">
-        <ul class="answers">
+        <div id="qtitle">
+          <h1>${model.question.title}</h1> 
+          <input id="question_id" type="hidden" value="${model.question._id}">
+        </div>
+        <div id="qthumb">         
+          <img src="/img/upload/legs.png" class="qthumb">
+          <span id="shadow"></span>
+          <span id="answer"></span> 
+        </div>        
+        <ul id="pick-answer">
           <% model.question.answers.eachWithIndex { answer, i -> %>
           <li id="${i}_answer">
+            <p>${answer.title}</p>
             <input type="radio" value="${answer.title}" id="${i}_title" name="select" data-color="${answer.color}" data-value="${answer.value}">
-            <label for="${i}_title">${answer.title}</label>
+            <label for="${i}_title"></label>
           </li>
-          <% } %>
-        </ul> 
+          <% } %>          
+        </ul>
       </div>
       <div id="qgraph">
         <div id="qtitle" class="small">
-          <h1>${model.question.title}</h1>  
+          <h1 id="participant-count">${model.question.total}</h1>
+          <span>participants</span> 
         </div>
-        <canvas id="myChart" width="280" height="368"></canvas> 
+        <div id="result-list">
+          <ul>
+            <% model.question.answers.eachWithIndex { answer, i -> %>
+            <li id="result${i+1}" class="result"><h2>${answer.value}</h2><span>${answer.title}</span></li>
+            <% } %>
+          </ul>
+        </div>
+        <div id="next-question"></div>
+        <canvas id="myChart" width="180" height="180"></canvas> 
       </div>    
     </div>
 
     <footer id="main-footer">
       <ul id="footer-nav">
-        <li id="me"><a href="/profile">Me</a></li>
+        <li id="menu"><a href="#">Me</a></li>
         <li id="ask"><a href="/question/ask">Ask?</a></li>
-        <li id="answer"><a href="" data-slide="-1">Answer!<span class="skip"></span></a></li>
+        <li id="share"><a href="">Share</a></li>
       </ul>
     </footer> 
   </div>  
@@ -59,6 +77,7 @@
   <!-- JS -->
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script type="text/javascript" src="/js/chart.js"></script>
-  <script type="text/javascript" src="/js/general.js"></script>  
+  <script type="text/javascript" src="/js/general.js"></script>
+    
 </body>
 </html>

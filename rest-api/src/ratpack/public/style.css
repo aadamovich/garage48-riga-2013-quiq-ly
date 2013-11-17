@@ -1,7 +1,7 @@
 /*-----------------------------------------------------------------------------------
 
 Theme Name: 
-Author: Teodors Zeltiņš
+Author: Teodors Zeltins
 Author URI: http://teodors.lv
 Description: 
 Version: 1.0
@@ -27,7 +27,28 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 /*-----------------------------------------------------------------------------------
   1.  Document Setup
 -----------------------------------------------------------------------------------*/
+@font-face {
+    font-family: 'Quicksand Bold';
+    src: url('/fonts/quicksand-bold-webfont.eot');
+    src: url('/fonts/quicksand-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/quicksand-bold-webfont.woff') format('woff'),
+         url('/fonts/quicksand-bold-webfont.ttf') format('truetype'),
+         url('/fonts/quicksand-bold-webfont.svg#quicksandbold') format('svg');
+    font-weight: bold;
+    font-style: normal;
 
+}
+@font-face {
+    font-family: 'Quicksand Regular';
+    src: url('/fonts/quicksand-regular-webfont.eot');
+    src: url('/fonts/quicksand-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/quicksand-regular-webfont.woff') format('woff'),
+         url('/fonts/quicksand-regular-webfont.ttf') format('truetype'),
+         url('/fonts/quicksand-regular-webfont.svg#quicksandregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
 * {
   box-sizing:border-box;
   -moz-box-sizing:border-box;
@@ -68,37 +89,42 @@ h1 {
   2.  Navigation
 -----------------------------------------------------------------------------------*/
 
-nav#main-nav {
-  height: 40px;
-  background: #fff;
+#status-bar {
+  background: url(/img/status-bar.png) no-repeat;
+  width: 100%;
+  height: 20px;
   display: block;
+  overflow: hidden;
+}
+nav#main-nav {
+  height: 64px;
+  width: 100%;
+  background: #565656;
+  display: block;
+  overflow: hidden;
 }
 nav#main-nav #author span {
   font-weight: bold;
 }
 nav#main-nav #author {
   float: left;
-  margin: 0 0 0 20px;
+  margin: 10px 0 10px 20px;
+  height: 24px;
 }
-nav#main-nav #time {
-  margin: 0 20px 0 0;
-  float: right;
-  font-style: italic;
-  color: #aaaaaa;
+nav#main-nav #author p {
+  font-family: "Quicksand Bold";
+  color: #818181;
+  float: left;
+  line-height: 24px;
+  font-size: 12px;
 }
-nav#main-nav p {
-  line-height: 40px;
-}
-#tick {
-  background: url(/img/arrow.png) no-repeat;
-  width: 40px;
-  height: 20px;
-  position: absolute;
+nav#main-nav #author img {
+  border-radius: 12px;
+  width: 24px;
+  height: 24px;
+  float: left;
   display: block;
-  left: 50%;
-  z-index: 100;
-  top: 40px;
-  margin: 0 0 0 -20px;
+  margin: 0 15px 0 0;
 }
 #position-nav {
   height: 100px;
@@ -170,6 +196,8 @@ nav#main-nav p {
 #content {
   width: 200%;
   overflow: hidden;
+  display: block;
+  height: 455px;
   position: relative;
 }
 #qplace, #qgraph, #qask1, #qask2, #qask3 {
@@ -178,7 +206,13 @@ nav#main-nav p {
   overflow: auto;
   display: block;
   float: left;
-  position: relative;
+  position: absolute;
+}
+#qgraph {
+  left: 50%;
+}
+#qplace {
+  left: 0;
 }
 #qask1, #qask2, #qask3 {
   width: 25%;
@@ -203,7 +237,7 @@ nav#main-nav p {
   border-radius: 15px;
   border: 1px solid #ccc;
   color: #ccc;
-  margin: 0 20px;
+  margin: 0 20px 10px 20px;
   padding: 0 10px;
   line-height: 30px;
 }
@@ -237,66 +271,139 @@ nav#main-nav p {
 #qtitle {
   display: block;
   position: absolute;
-  display: table;
-  width: 320px;
-  height: 280px; 
-  padding: 0 20px; 
-}
-#qtitle h1, #qtitle h2 {
-  color: #fff;
-  font-size: 22px;
-  font-weight: bold;
-  display: table-cell; 
-  vertical-align: middle; 
-  text-align: center; 
-}
-#qtitle.small {
-  height: 100px;
-  background: #b9b9ba;
+  top: 25px;
+  left: 20px;
+  float: left;
+  width: 210px;
+  z-index: 100;
 }
 #qtitle.small h1 {
-  font-size: 14px;
+  color: #565656;
+  font-size: 48px;
+  line-height: 1.1;
+  font-family: "Quicksand Regular";
+}
+#qtitle.small span {
+  color: #565656;
+  font-size: 12px;
+  font-family: "Quicksand Regular";
+}
+#qtitle h1 {
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Quicksand Bold";
+  line-height: 1.5;
+  text-transform: uppercase;
 }
 #myChart {
-  position: relative;
-  margin: 0 20px;
-  top: 100px;
+  position: absolute;
+  left: 50%;
+  margin: 0 0 0 -90px;
+  top: 180px;
   display: block;
-}
-.answers span {
-  margin: 10px 15px 0 0;
-  width: 20px;
-  height: 20px;
-  background: red;
-  display: block;
-  float: left;
 }
 .qthumb {
   display: block;
   background: #b9b9ba;
   width: 320px;
-  height: 280px;
+  height: 243px;
 }
-.answers li {
-  height: 42px;
+.qthumb img {
   width: 100%;
-  border-bottom: 1px solid #B9B9BA;
-  background: #fff;
-  line-height: 42px;
+  height: 100%;
 }
-.answers li input {
-  display: none;
-}
-.answers li label {
-  background: url(/img/unchecked.png) 20px 11px no-repeat;
+span#shadow {
+  background: url(/img/drop-shadow.png) top center repeat-x;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 42px;
+  height: 210px;
+  opacity: 0.6;
+}
+span#answer {
+  background: url(/img/answer.png) top center no-repeat;
+  position: absolute;
+  top: 35px;
+  right: 43px;
+  height: 20px;
+  width: 11px;
   display: block;
   cursor: pointer;
-  padding: 0 55px;
 }
-.answers li input:checked + label {
-  background: url(/img/checked.png) 20px 11px no-repeat;
+#next-question {
+  background: url(/img/answer-blue.png) top center no-repeat;
+  position: absolute;
+  top: 35px;
+  right: 43px;
+  height: 20px;
+  width: 11px;
+  display: block;
+  cursor: pointer;
+}
+#pick-answer {
+  margin: 21px 0 0 0;
+}
+#pick-answer li {
+  padding: 0 35px 0 40px;
+  margin: 0 0 10px 0;
+  height: 34px;
+  width: 100%;
+  line-height: 34px;
+
+}
+#pick-answer li p {
+  float: left;
+  font-size: 16px;
+  font-family: "Quicksand Regular";
+}
+#pick-answer li input {
+  display: none;
+}
+#pick-answer li label {
+  background: #fff;
+  border: 1px solid #45aca9;
+  border-radius: 17px;
+  width: 34px;
+  height: 34px;
+  display: block;
+  cursor: pointer;
+  float: right;
+}
+#pick-answer li input:checked + label {
+  background: #45aca9 url(/img/tick.png) center center no-repeat;
+}
+.result {
+  position: absolute;
+  display: none;
+}
+.result h2 {
+  font-size: 24px;
+  line-height: 1.1;
+  font-family: "Quicksand Bold";
+}
+#result1 {
+  left: 20px;
+  top: 150px;
+}
+#result2 {
+  left: 184px;
+  top: 118px;
+}
+#result3 {
+  left: 224px;
+  top: 350px;
+}
+#result4 {
+  left: 54px;
+  top: 370px;
+}
+#result1 span {
+  font-family: "Quicksand Regular";
+  font-size: 16px;
+  line-height: 1.2;
 }
 
 /*-----------------------------------------------------------------------------------
@@ -304,9 +411,9 @@ nav#main-nav p {
 -----------------------------------------------------------------------------------*/
 
 footer {
-  height: 60px;
+  height: 49px;
   width: 100%;
-  background: #444;
+  background: #45aca9;
   position: absolute;
   bottom: 0px;
   display: block;
@@ -314,62 +421,44 @@ footer {
 }
 #footer-nav {
   width: 100%;
+  height: 49px;
+  display: block;
+  overflow: hidden;
 }
 #footer-nav li {
   float: left;
   display: block;
-  height: 60px;
-  line-height: 40px;
-  width: 25%;
+  height: 49px;
+  line-height: 49px;
 }
 #footer-nav li a {
+  font-family: "Quicksand Bold";
   text-align: center;
-  height: 40px;
-  margin: 10px 0;
+  height: 49px;
   color: #fff;
   font-weight: bold;
-  font-size: 13px;
+  font-size: 18px;
   display: block;
-  background: #614ed1;
   text-transform: uppercase;
 }
-#footer-nav li#answer, #footer-nav li#back, #footer-nav li#next {
-  width: 50%;
-  background: #8bce5f;
+#footer-nav li#menu {
+  width: 49px;
+  height: 49px; 
 }
-#footer-nav li#answer a, #footer-nav li#next a {
-  background: #77bc4a;
-  margin-right: 10px;
-  border-radius: 0 4px 4px 0;
+#footer-nav li#share {
+  float: right;
+  margin: 0 20px 0 0;
 }
-#footer-nav li#ask {
-  background: #766dc6;
+#footer-nav li a {
+  padding: 0 5px;
 }
-#footer-nav li#ask a {
-  background: #625f99;
+#footer-nav li#menu a {
+  text-indent: -9999px;
+  padding: 0;
+  background: url(/img/menu.png) center center no-repeat;
 }
-#footer-nav li#preview {
-  display: none;
-  background: #fcff71;
-}
-#footer-nav li#preview a {
-  background: #d3d331;
-}
-#footer-nav li#back {
-  background: #ff4848;
-}
-#footer-nav li#back a {
-  margin-left: 10px;
-  border-radius: 4px 0 0 4px;
-  background: #d33737;
-}
-#footer-nav li#me a {
-  background: #2b2b2b;
-  margin-left: 10px;
-  border-radius: 4px 0 0 4px;
-}
-#footer-nav li a:hover {
-  background: #fff;
+#footer-nav li:hover {
+  background: #2b928f;
 }
 
 

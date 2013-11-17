@@ -69,11 +69,14 @@ class DataService {
 				}
 			}
 		  }
+		  int total = 0
 		  question.answers.each { answer ->
 			  if (!answer.value) {
 				 answer.value = 0
 			  }
+			  total += answer.value
 		  }
+		  question.total = total
 	}
 
 	static insertQuestion(question) {
