@@ -96,7 +96,15 @@ class DataService {
 	static deleteQuestion(String id) {
 		db.questions.remove('_id': id)
 	}
-		
+
+	static subscribe(subscription) {
+		db.subscriptions.insert(subscription)
+	}
+
+	static rate(rate) {
+		db.rates.insert(rate)
+	}
+			
 	private static DB getDb() {
 		def mongo = new GMongo()
 		mongo.getDB('tell-me')

@@ -48,6 +48,16 @@ ratpack {
 	// API 
 	//////////////////////////////////////////////
 
+	get("api/subscribe") {
+		def subscription = new JsonSlurper().parseText(request.text)		
+		render DataService.subscribe(subscription)
+	}
+
+	get("api/rate") {
+		def rate = new JsonSlurper().parseText(request.text)		
+		render DataService.rate(rate)
+	}
+
 	get("api/questions/random1") {
 		render DataService.getJsonRandomQuestion()
 	}
