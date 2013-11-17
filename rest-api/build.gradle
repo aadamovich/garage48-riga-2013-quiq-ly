@@ -60,7 +60,7 @@ project.ext {
         [ title: 'Miley Cyrus', image: '' ],
       ]
     ],
-    [ 
+    /*[ 
       _id: UUID.randomUUID().toString(),
       _random: (Integer) (Math.random() * 100),
       title: 'Who will win Garage48 in Riga, 2013?', 
@@ -82,7 +82,7 @@ project.ext {
         [ title: '3dcutting' ],
         [ title: 'Recipes' ],
       ]
-    ],
+    ],*/
   ]
 }
 
