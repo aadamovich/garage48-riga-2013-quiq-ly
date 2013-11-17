@@ -584,9 +584,52 @@ footer {
   5.  Media Queries
 -----------------------------------------------------------------------------------*/
 
-@media (max-width: 420px) {
-  #device-display > li {
+@media (max-width: 620px) {
+  form {
+    display: none;
+  }
+  #social-icons {
+    display: none;
+  }
+  .qthumb {
+    width: 100%;
+  }
+  #qplace #pick-answer {
+    height: 100%;
+    overflow: auto;
+  }
+  #container {
+    width: 100%;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    position: absolute;
+  }
+  #qplace, #qplacepic, #qgraph, #qask1, #qask2, #qask3 {
+    height: 100%;
+  }
+  #content {
+    height: 100%;
+  }
+  #qplacepic #pick-answer li {
     width: 50%;
-    height: 25%;
+  }
+  #qplacepic #pick-answer li img {
+    width: 100%;
+  }
+  #container {
+    width: 100%;
+    height: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    position: absolute;
+  }
+  #qplacepic #pick-answer li .up-shadow {
+    width: 100%;
   }
 }
