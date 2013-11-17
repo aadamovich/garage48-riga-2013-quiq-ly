@@ -79,11 +79,13 @@ class DataService {
 	static insertQuestion(question) {
 		question.'_id' = UUID.randomUUID().toString()
 		question.'_random' = (Integer) (Math.random() * 100)
+		question.'_timestamp' = System.currentTimeMillis()
 		db.questions.insert(question)
 	}
 
 	static insertAnswer(answer) {
 		answer.'_id' = UUID.randomUUID().toString()
+		answer.'_timestamp' = System.currentTimeMillis()
 		db.answers.insert(answer)
 	}
 

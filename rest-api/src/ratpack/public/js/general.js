@@ -59,7 +59,7 @@ function createQuestion() {
 		   // '"image": "' + $('#question_image').val() + '",' +
 		   '"answers": " [' +  
 		   		'{ title: "' + $('#answer_title').val() + '" },' +
-		   ']'
+		   ']' + 
 		'}',
 	  dataType: "json"
 	});

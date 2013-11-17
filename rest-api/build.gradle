@@ -32,9 +32,9 @@ project.ext {
   ]
 
   production = [
-    server: 'ec2-54-217-31-12.eu-west-1.compute.amazonaws.com',
-    database: 'ec2-54-217-31-12.eu-west-1.compute.amazonaws.com:27017',
-    api: 'http://ec2-54-217-31-12.eu-west-1.compute.amazonaws.com:5050'
+    server: 'quiq.ly',
+    database: 'quiq.ly:27017',
+    api: 'http://quiq.ly:5050'
   ]
 
   questions = [
