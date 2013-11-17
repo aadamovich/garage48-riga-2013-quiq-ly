@@ -49,6 +49,23 @@ function answerQuestion() {
   $('#answer a').href = '/question/random'
 }
 
+function createQuestion() {
+  $.ajax({
+	  type: "POST",
+	  url: "/api/questions/new",
+	  data: 
+		'{ ' +
+		   '"title": "' + $('#question_title').val() + '",' +
+		   // '"image": "' + $('#question_image').val() + '",' +
+		   '"answers": " [' +  
+		   		'{ title: "' + $('#answer_title').val() + '" },' +
+		   ']'
+		'}',
+	  dataType: "json"
+	});
+  $('#answer a').href = '/question/random'
+}
+
 function loadQuestion() {
   $.getJSON( "/api/questions/random1", function(data) {
 	  $('#question_id').val(data._id);

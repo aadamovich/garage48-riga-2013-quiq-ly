@@ -36,6 +36,10 @@ ratpack {
 		render groovyTemplate('profile.html')
 	}
 
+	get("channel") {
+		render groovyTemplate('channel.html')
+	}
+
 	get("api") {
 		render groovyTemplate('api.html')
 	}
