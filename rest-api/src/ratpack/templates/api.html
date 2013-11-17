@@ -42,6 +42,43 @@ HTTP GET http://localhost:5050/api/questions/random/1
 
 
 
+
+<h2>Operation: Get single random question</h2>
+<strong>Path<strong>: api/questions/random1<br/>
+<strong>Method<strong>: <code>GET</code><br/>
+<strong>Request example</strong>:<br/>
+<pre>
+HTTP GET http://localhost:5050/api/questions/random1
+</pre>
+<strong>Response example</strong>:<br/>
+<pre>
+{
+    "_id":"0f881df6-2414-455b-81d6-fcdccd052892",
+    "title":"What did you have for dinner yesterday?",
+    "answers":[
+       {
+          "title":"Cheese salad",
+          "value":72
+       },
+       {
+          "title":"Cheese salad (2 hours old)",
+          "value":21
+       },
+       {
+          "title":"Cheese salad (5 hours old)",
+          "value":46
+       },
+       {
+          "title":"Red Bull",
+          "value":29
+       }
+    ]
+}
+</pre>
+
+
+
+
 <h2>Operation: Submit new question</h2>
 <strong>Path<strong>: api/questions/new<br/>
 <strong>Method<strong>: <code>POST</code><br/>
