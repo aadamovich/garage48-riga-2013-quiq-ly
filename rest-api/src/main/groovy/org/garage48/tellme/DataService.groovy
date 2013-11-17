@@ -77,15 +77,12 @@ class DataService {
 	}
 
 	static insertQuestion(question) {
-		question.'_id' = UUID.randomUUID().toString()
-		question.'_random' = (Integer) (Math.random() * 100)
-		question.'_timestamp' = System.currentTimeMillis()
+		enrichRecord(question)		
 		db.questions.insert(question)
 	}
 
 	static insertAnswer(answer) {
-		answer.'_id' = UUID.randomUUID().toString()
-		answer.'_timestamp' = System.currentTimeMillis()
+		enrichRecord(answer)
 		db.answers.insert(answer)
 	}
 
@@ -98,13 +95,21 @@ class DataService {
 	}
 
 	static subscribe(subscription) {
+		enrichRecord(subscription)
 		db.subscriptions.insert(subscription)
 	}
 
 	static rate(rate) {
+		enrichRecord(rate)
 		db.rates.insert(rate)
 	}
 			
+	static enrichRecord(record) {
+		record.'_id' = UUID.randomUUID().toString()
+		record.'_timestamp' = System.currentTimeMillis()
+		record.'_random' = (Integer) (Math.random() * 100)
+	}
+	
 	private static DB getDb() {
 		def mongo = new GMongo()
 		mongo.getDB('tell-me')

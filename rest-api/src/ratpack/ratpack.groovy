@@ -69,7 +69,7 @@ ratpack {
 		def question = new JsonSlurper().parseText(request.text)
 		println "Question to insert: ${question}" 
 		insertQuestion(question)
-		render '{ "response": "OK" }'
+		render '{ "_id": "' + question._id + '", "response": "OK" }'
 	}
 
 	get('api/question/:id') { 
