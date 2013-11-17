@@ -48,16 +48,6 @@ ratpack {
 	// API 
 	//////////////////////////////////////////////
 
-	get("api/subscribe") {
-		def subscription = new JsonSlurper().parseText(request.text)		
-		render DataService.subscribe(subscription)
-	}
-
-	get("api/rate") {
-		def rate = new JsonSlurper().parseText(request.text)		
-		render DataService.rate(rate)
-	}
-
 	get("api/questions/random1") {
 		render DataService.getJsonRandomQuestion()
 	}
@@ -126,6 +116,18 @@ ratpack {
 		render '{ "_id" : "' + id + '", "response": "OK" }'
 	}
 
+	post("api/subscribe") {
+		def subscription = new JsonSlurper().parseText(request.text)
+		DataService.subscribe(subscription)
+		render '{ "response": "OK" }'
+	}
+
+	post("api/rate") {
+		def rate = new JsonSlurper().parseText(request.text)
+		DataService.rate(rate)
+		render '{ "response": "OK" }'
+	}
+	
     assets "public"
 	
   }

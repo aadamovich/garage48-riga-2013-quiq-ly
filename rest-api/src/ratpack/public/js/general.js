@@ -133,6 +133,30 @@ function createQuestion() {
   $('#answer a').href = '/question/random'
 }
 
+function subscribe() {
+  $.ajax({
+	  type: "POST",
+	  url: "/api/subscribe",
+	  data: 
+		'{ ' +
+		   '"email": "' + $('#subscribe_email').val() + '",' +
+		'}',
+	  dataType: "json"
+	});
+}
+
+function rate() {
+  $.ajax({
+	  type: "POST",
+	  url: "/api/rate",
+	  data: 
+		'{ ' +
+		   '"rate": "' + $('#rate').val() + '",' +
+		'}',
+	  dataType: "json"
+	});
+}
+
 function loadQuestion() {
   $.getJSON( "/api/questions/random1", function(data) {
 	  $('#question_id').val(data._id);
