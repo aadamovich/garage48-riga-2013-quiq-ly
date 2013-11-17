@@ -18,7 +18,11 @@ ratpack {
 	get {
 		render groovyTemplate('answer.html', question: getRandomQuestion())
 	}
-	  
+
+	get("48") {		
+		redirect "questions/09e2b2e1-e94c-4e71-b429-c86fdec27438"
+	}
+
 	get("questions/:id") {
 		def id = DataService.getPathId(request.path)
 		render groovyTemplate('answer.html', question: getQuestion(id))

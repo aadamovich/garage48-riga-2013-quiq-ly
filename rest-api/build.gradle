@@ -63,6 +63,17 @@ project.ext {
     [ 
       _id: UUID.randomUUID().toString(),
       _random: (Integer) (Math.random() * 100),
+      title: 'What is your role at Garage48?', 
+      answers: [
+        [ title: 'Visionary' ],
+        [ title: 'Marketer' ],
+        [ title: 'Designer' ],
+        [ title: 'Developer' ],
+      ]
+    ],
+    [ 
+      _id: UUID.randomUUID().toString(),
+      _random: (Integer) (Math.random() * 100),
       title: 'Who will win Garage48 in Riga, 2013?', 
       answers: [
         [ title: 'Zentox' ],
@@ -191,13 +202,15 @@ def getHttp(path) {
 def getAnswerData() {
   def answers = []
   questions.each { question ->
-    question.answers.each { answer ->
-      int answerCount = (Integer) (Math.random() * 100)
-      (1..answerCount).each {
-        answers << [ 
-          question_id: question._id,
-          title: answer.title,
-        ] 
+    if (question.title != 'Who will win Garage48 in Riga, 2013?') {
+      question.answers.each { answer ->
+        int answerCount = (Integer) (Math.random() * 100)
+        (1..answerCount).each {
+          answers << [ 
+            question_id: question._id,
+            title: answer.title,
+          ] 
+        }
       }
     }
   }
