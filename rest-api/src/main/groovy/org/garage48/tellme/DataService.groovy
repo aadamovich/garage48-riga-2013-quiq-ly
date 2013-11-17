@@ -41,7 +41,11 @@ class DataService {
 		  enrichQuestion(question)
 		}
 		question
-	}	
+	}
+	
+	static getJsonRandomQuestion() {
+		produceJson(getRandomQuestion())
+	}
 
 	static private enrichQuestion(question) {
 		def colors = [ "#F7464A", "#E2EAE9", "#D4CCC5", "#949FB1", "#4D5360" ]

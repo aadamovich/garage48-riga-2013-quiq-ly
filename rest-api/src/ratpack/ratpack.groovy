@@ -44,6 +44,10 @@ ratpack {
 	// API 
 	//////////////////////////////////////////////
 
+	get("api/questions/random1") {
+		render DataService.getJsonRandomQuestion()
+	}
+
     get("api/questions/random/:amount") {
 		int amount = 5
 		def amountString = DataService.getPathId(request.path)
@@ -56,7 +60,7 @@ ratpack {
 	get("api/questions/random") {
 		redirect "random/5"
 	}
-
+	
 	post("api/questions/new") {
 		def question = new JsonSlurper().parseText(request.text)
 		println "Question to insert: ${question}" 

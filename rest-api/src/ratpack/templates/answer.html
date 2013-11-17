@@ -31,10 +31,10 @@
         <img src="" class="qthumb">
         <input id="question_id" type="hidden" value="${model.question._id}">
         <ul class="answers">
-          <% model.question.answers.each { answer -> %>
-          <li>
-            <input type="radio" value="${answer.title}" id="${answer.title}" name="select">
-            <label for="${answer.title}">${answer.title}</label>
+          <% model.question.answers.eachWithIndex { answer, i -> %>
+          <li id="${i}_answer">
+            <input type="radio" value="${answer.title}" id="${i}_title" name="select" data-color="${answer.color}" data-value="${answer.value}">
+            <label for="${i}_title">${answer.title}</label>
           </li>
           <% } %>
         </ul> 
@@ -59,20 +59,6 @@
   <!-- JS -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="/js/chart.js"></script>
-  <script type="text/javascript">  
-    // Something happens here.
-    function getData() {    	      
-      var data = [
-        <% model.question.answers.each { answer -> %>                 
-        {
-          value: ${answer.value},
-          color: "${answer.color}"
-        },
-        <% } %>
-      ];
-      return data;
-    }  
-  </script>
   <script type="text/javascript" src="/js/general.js"></script>  
 </body>
 </html>
