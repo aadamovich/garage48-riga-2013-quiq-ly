@@ -24,6 +24,73 @@ jQuery(document).ready(function() {
 		return false;
 		
 	});
+		
+	$('#back a').click(function(){
+		var activeSlide = $(this).attr('data-slide');
+
+		switch (activeSlide) {
+			case "1":
+				$(this).attr('data-slide', 0);
+				$("#next a").attr('data-slide', 1);
+
+				$(".hrline1").removeClass("active");
+				$(".bubble2").removeClass("active");
+				break;
+
+			case "2":
+				$(this).attr('data-slide', 1);
+				$("#next a").attr('data-slide', 2);
+
+				$(".hrline2").removeClass("active");
+				$(".bubble3").removeClass("active");
+				$("#next a").html("NEXT");
+				$("#preview").css("display","none");
+				$(this).parent().css("width","50%");
+				break;
+		}
+
+		$('#content').animate({
+		  left : "-" + ((activeSlide-1)*100) + "%"
+		}, 1000);
+
+		if(activeSlide != 0) return false;	
+	});
+
+	$('#next a').click(function(){
+		activeSlide = $(this).attr('data-slide');
+
+		switch (activeSlide) {
+			case "1":
+				$("#back a").attr('data-slide', 1);
+				$(this).attr('data-slide', 2);
+
+				$(".hrline1").addClass("active");
+				$(".bubble2").addClass("active");
+				break;
+
+			case "2":
+				$("#back a").attr('data-slide', 2);
+				$(this).attr('data-slide', 3);
+
+				$(".hrline2").addClass("active");
+				$(".bubble3").addClass("active");
+				$("#preview").css("display","block");
+				$("#next a").html("complete");
+				$("#back").css("width","25%");
+				break;
+		}
+		$('#content').animate({
+		  left : "-" + (activeSlide*100) + "%"
+		}, 1000);
+
+		if(activeSlide != 3) return false;
+	});
+
+	$('#file-upload').click(function(){
+		$("#fileId").click(); 
+		return false;
+	});
+	
 
 });
 

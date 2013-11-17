@@ -99,7 +99,58 @@ nav#main-nav p {
   z-index: 100;
   top: 40px;
   margin: 0 0 0 -20px;
-
+}
+#position-nav {
+  height: 100px;
+  background: #f2f2f2;
+}
+#position-nav ul li.bubble {
+  position: absolute;
+  font-weight: bold;
+  line-height: 46px;
+  font-size: 14px;
+  text-align: center;
+  top: 27px;
+  width: 46px;
+  height: 46px;
+  display: block;
+  border: 2px solid #9b9b9b;
+  background: #f2f2f2;
+  float: left;
+  border-radius: 23px;
+}
+#position-nav ul li.bubble.active {
+  border: 2px solid #249b54;
+  background: #249b54; 
+  color: #fff;
+}
+#position-nav ul li.bubble1 {
+  left: 20px;
+}
+#position-nav ul li.bubble2 {
+  left: 50%;
+  margin-left: -23px;
+}
+#position-nav ul li.bubble3 {
+  right: 20px;
+}
+#position-nav ul li.hrline {
+  position: absolute;
+  width: 100px;
+  display: block;
+  height: 2px;
+  background: #9b9b9b;
+}
+#position-nav ul li.hrline.active {
+  background: #249b54; 
+}
+#position-nav ul li.hrline1 {
+  top: 49px;
+  left: 66px;
+}
+#position-nav ul li.hrline2 {
+  top: 49px;
+  left: 182px;
 }
 
 /*-----------------------------------------------------------------------------------
@@ -121,13 +172,62 @@ nav#main-nav p {
   overflow: hidden;
   position: relative;
 }
-#qplace, #qgraph {
+#qplace, #qgraph, #qask1, #qask2, #qask3 {
   width: 50%;
   height: 468px;
   overflow: auto;
   display: block;
   float: left;
   position: relative;
+}
+#qask1, #qask2, #qask3 {
+  width: 25%;
+}
+#qask1 #qtitle, #qask2 #qtitle, #qask3 #qtitle {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 120px;
+}
+#qask2 #qtitle.small {
+  height: 80px;
+  display: table;
+}
+#qask2 #qtitle.small h2 {
+  font-size: 14px;
+  color: #fff;
+}
+#qask2 input.answer-field {
+  width: 280px;
+  height: 30px;
+  border-radius: 15px;
+  border: 1px solid #ccc;
+  color: #ccc;
+  margin: 0 20px;
+  padding: 0 10px;
+  line-height: 30px;
+}
+#qask1 #qtitle h1, #qask2 #qtitle h1, #qask3 #qtitle h1 {
+  color: #282828;
+  font-size: 18px;
+}
+#ask-question {
+  width: 280px;
+  margin: 0 20px;
+  padding: 10px;
+  border-radius: 3px;
+  height: 90px;
+  border: 1px solid #ccc;
+  resize: vertical;
+}
+#file-upload {
+  width: 280px;
+  margin: 0 20px;
+  height: 140px;
+  border: 3px dashed #ccc;
+  border-radius: 3px;
+  text-indent: -9999px;
+  background: url(/img/camera.png) center center no-repeat;
 }
 .qmeta {
   display: block;
@@ -139,9 +239,10 @@ nav#main-nav p {
   position: absolute;
   display: table;
   width: 320px;
-  height: 280px;  
+  height: 280px; 
+  padding: 0 20px; 
 }
-#qtitle h1 {
+#qtitle h1, #qtitle h2 {
   color: #fff;
   font-size: 22px;
   font-weight: bold;
@@ -154,7 +255,7 @@ nav#main-nav p {
   background: #b9b9ba;
 }
 #qtitle.small h1 {
-  font-size: 16px;
+  font-size: 14px;
 }
 #myChart {
   position: relative;
@@ -232,11 +333,11 @@ footer {
   background: #614ed1;
   text-transform: uppercase;
 }
-#footer-nav li#answer {
+#footer-nav li#answer, #footer-nav li#back, #footer-nav li#next {
   width: 50%;
   background: #8bce5f;
 }
-#footer-nav li#answer a {
+#footer-nav li#answer a, #footer-nav li#next a {
   background: #77bc4a;
   margin-right: 10px;
   border-radius: 0 4px 4px 0;
@@ -246,6 +347,21 @@ footer {
 }
 #footer-nav li#ask a {
   background: #625f99;
+}
+#footer-nav li#preview {
+  display: none;
+  background: #fcff71;
+}
+#footer-nav li#preview a {
+  background: #d3d331;
+}
+#footer-nav li#back {
+  background: #ff4848;
+}
+#footer-nav li#back a {
+  margin-left: 10px;
+  border-radius: 4px 0 0 4px;
+  background: #d33737;
 }
 #footer-nav li#me a {
   background: #2b2b2b;

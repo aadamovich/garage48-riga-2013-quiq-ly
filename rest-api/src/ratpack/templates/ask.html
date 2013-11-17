@@ -16,38 +16,50 @@
   
 </head>
 <body>
+	<div id="container">
+		<nav id="position-nav">
+			<ul>
+				<li class="bubble bubble1 active">1.</li>
+				<li class="hrline hrline1"></li>
+				<li class="bubble bubble2">2.</li>
+				<li class="hrline hrline2"></li>
+				<li class="bubble bubble3">3.</li>
+			</ul>
+		</nav>
+		
+		<div id="content" style="width:400%">
+			<div id="qask1">
+				<div id="qtitle">
+					<h1>What would you like to know? Ask!</h1>	
+				</div>
+				<textarea type="text" id="ask-question" name="question"></textarea> 
+			</div>
+			<div id="qask2">
+				<div id="qtitle" class="small">
+					<h2>Would you eat this?</h2>	
+				</div>
+				<div id="qtitle">
+					<h1>Enter answers:</h1>	
+				</div>
+				<input type="text" id="answer1" class="answer-field" name="1" />
+			</div>	
+			<div id="qask3">
+				<div id="qtitle">
+					<h1>Add image.</h1>	
+				</div>
+				<a href="#" id="file-upload"/> Upload File</a>
+				<input type="file" id="fileId" style="visibility: hidden;" />
+			</div>		
+		</div>
 
-  <div id="container">
-  
-    <nav id="main-nav">
-      <p id="author">Asked by: <span>Quiqly</span></p>
-      <p id="time">just now</p>
-      <span id="tick"></span>
-    </nav>
-    
-    <div id="content">
-      <div id="qplace">
-        <div id="qtitle"><h1></h1></div>
-        <img src="" class="qthumb">
-        <ul class="answers">
-        </ul> 
-      </div>
-      <div id="qgraph">
-        <div id="qtitle" class="small">
-          <h1>Would you eat this?</h1>  
-        </div>
-        <canvas id="myChart" width="280" height="368"></canvas> 
-      </div>    
-    </div>
-
-    <footer id="main-footer">
-      <ul id="footer-nav">
-        <li id="me"><a href="/profile">Me</a></li>
-        <li id="ask"><a href="/">Cancel</a></li>
-        <li id="answer"><a href="javascript:commit()" data-slide="-1">Ask!<span class="skip"></span></a></li>
-      </ul>
-    </footer> 
-  </div>  
+		<footer id="main-footer">
+			<ul id="footer-nav">
+				<li id="back"><a href="index.html" data-slide="0">Back</a></li>
+				<li id="preview"><a href="#">Preview</a></li>
+				<li id="next"><a href="ask.html" data-slide="1">Next<span class="skip"></span></a></li>
+			</ul>
+		</footer>	
+	</div>	
 
   <!-- JS -->
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>  
