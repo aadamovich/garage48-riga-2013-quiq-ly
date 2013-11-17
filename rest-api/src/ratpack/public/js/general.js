@@ -233,6 +233,7 @@ function loadQuestion() {
 	  $('#qplace #qtitle h1').text(data.title);
 	  $('#participant-count').text(data.total);
 	  var newAnswers = '<ul id="pick-answer">'
+	  var newLabels = '<div id="result-list"><ul>'
 	  for (var i = 0; i < data.answers.length; i++) {
 		  var answer = data.answers[i].title
 		  var color = data.answers[i].color
@@ -241,9 +242,12 @@ function loadQuestion() {
 		                '<p>' + answer + '</p>' + 
 		                '<input type="radio" value="' + answer + '" id="' + i + '_title" name="select" data-color="' + color + '" data-value="' + value + '">' + 
 		                '<label for="' + i + '_title"></label></li>'
+		  newLabels += '<li id="result' + (i+1) + '" class="result"><h2>' + answer + '</h2><span>' + answer + '</span></li>'              
 	  }
 	  newAnswers += '</ul>'; 
+	  newAnswers += '</ul></div>';              
       $('#pick-answer').replaceWith(newAnswers);
+      $('#result-list').replaceWith(newLabels);
       addChoiceHandler();       
   })
 }
