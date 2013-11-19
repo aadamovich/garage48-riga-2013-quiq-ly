@@ -1,5 +1,7 @@
-/rest-api/.gradle
-
+.gradle
+build
+tmp
 /rest-api/response.json
+*.exe
+*.bak
 
-/rest-api/kitty.exe
