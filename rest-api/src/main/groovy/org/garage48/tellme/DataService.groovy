@@ -1,4 +1,4 @@
-package org.garage48.tellme
+package ly.quiq.data
 
 import groovy.json.JsonBuilder
 
@@ -7,7 +7,7 @@ import com.mongodb.DB
 
 class DataService {
 
-	static final FILE_STORAGE = '/var/lib/tellme/storage'
+	static final FILE_STORAGE = '/var/lib/quiq-ly/storage'
 	static final Random RNG = new Random() 
 
 	static getPathId(String path) {
@@ -114,7 +114,7 @@ class DataService {
 	
 	private static DB getDb() {
 		def mongo = new GMongo()
-		mongo.getDB('tell-me')
+		mongo.getDB('quiq-ly')
 	}
 	
 	private static produceJson(content) {

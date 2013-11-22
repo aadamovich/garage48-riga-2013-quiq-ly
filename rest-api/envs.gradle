@@ -1,0 +1,16 @@
+
+project.ext {
+
+  local = [
+    server   : 'localhost',
+    database : 'localhost:27017',
+    api      : 'http://localhost:5050'
+  ]
+
+  production = [
+    server   : 'ec2-54-246-65-207.eu-west-1.compute.amazonaws.com',
+    database : 'localhost:27017',
+    api      : 'http://ec2-54-246-65-207.eu-west-1.compute.amazonaws.com'
+  ]
+
+}

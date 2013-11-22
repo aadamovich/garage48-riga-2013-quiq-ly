@@ -1,8 +1,7 @@
-import static org.garage48.tellme.DataService.*
+import static ly.quiq.data.DataService.*
 import ratpack.groovy.templating.*
 
 import groovy.json.JsonSlurper
-import org.garage48.tellme.*
 import ratpack.groovy.templating.*
 
 import static ratpack.groovy.Groovy.*

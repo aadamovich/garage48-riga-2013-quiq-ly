@@ -23,87 +23,15 @@ buildscript {
   }
 }
 
-project.ext {
-
-  local = [
-    server: 'localhost',
-    database : 'localhost:27017',
-    api : 'http://localhost:5050'
-  ]
-
-  production = [
-    server: 'quiq.ly',
-    database: 'quiq.ly:27017',
-    api: 'http://quiq.ly:5050'
-  ]
-
-  questions = [
-    [ 
-      _id: UUID.randomUUID().toString(),
-      _random: (Integer) (Math.random() * 100),
-      title: 'Which of these languages can you use?', 
-      answers: [
-        [ title: 'Ruby' ],
-        [ title: 'Python' ],
-        [ title: 'Java' ],
-        [ title: 'Groovy' ],
-      ]
-    ],
-    [ 
-      _id: UUID.randomUUID().toString(),
-      _random: (Integer) (Math.random() * 100),
-      title: 'What did you have dreams about last night?', 
-      answers: [
-        [ title: 'Female designers', image: '' ],
-        [ title: 'Two pancakes', image: '' ],
-        [ title: 'iPads', image: '' ],
-        [ title: 'Miley Cyrus', image: '' ],
-      ]
-    ],
-    [ 
-      _id: UUID.randomUUID().toString(),
-      _random: (Integer) (Math.random() * 100),
-      title: 'What is your role at Garage48?', 
-      answers: [
-        [ title: 'Visionary' ],
-        [ title: 'Marketer' ],
-        [ title: 'Designer' ],
-        [ title: 'Developer' ],
-      ]
-    ],
-    [ 
-      _id: UUID.randomUUID().toString(),
-      _random: (Integer) (Math.random() * 100),
-      title: 'Who will win Garage48 in Riga, 2013?', 
-      answers: [
-        [ title: 'Zentox' ],
-        [ title: 'EduTree' ],
-        [ title: 'Happinex' ],
-        [ title: 'quiq.ly' ],
-        [ title: 'BizCards' ],
-        [ title: 'Feel Riga' ],
-        [ title: 'Maps team' ],
-        [ title: 'Collective praying' ],
-        [ title: 'Freenlancer' ],
-        [ title: 'Poble' ],
-        [ title: 'myCogo' ],
-        [ title: 'Remote Control' ],
-        [ title: 'Best Friends Game' ],
-        [ title: 'airbay.me' ],
-        [ title: '3dcutting' ],
-        [ title: 'Recipes' ],
-      ]
-    ],
-  ]
-}
+apply   from: 'envs.gradle'
+apply   from: 'data.gradle'
+apply plugin: 'ratpack-groovy'
 
 repositories {
   maven { url "http://oss.jfrog.org/repo" }
   mavenCentral()
   maven { url "http://repo.springsource.org/repo" }
 }
-
-apply plugin: "ratpack-groovy"
 
 configurations.all {
   exclude module: "groovy"
@@ -157,11 +85,11 @@ task deploy(dependsOn: distZip) << {
         remoteDir "/tmp"
       }
     }
-    exec(command: 'sudo rm -rf /var/lib/tellme/*', failOnError: false)  
-    exec(command: 'sudo mkdir -p /var/lib/tellme/storage', failOnError: false)
-    exec 'sudo unzip /tmp/rest-api.zip -d /var/lib/tellme'
-    exec 'sudo chown -R ubuntu:ubuntu /var/lib/tellme'
-    exec 'cd /var/lib/tellme/rest-api/bin ; nohup sudo -b ./rest-api > /var/lib/tellme/rest-api/server.log'
+    exec(command: 'sudo rm -rf /var/lib/quiq-ly/*', failOnError: false)  
+    exec(command: 'sudo mkdir -p /var/lib/quiq-ly/storage', failOnError: false)
+    exec 'sudo unzip /tmp/rest-api.zip -d /var/lib/quiq-ly'
+    exec 'sudo chown -R ec2-user:ec2-user /var/lib/quiq-ly'
+    exec 'cd /var/lib/quiq-ly/rest-api/bin ; nohup sudo -b ./rest-api > /var/lib/quiq-ly/rest-api/server.log'
   }
 }
 
@@ -173,8 +101,8 @@ task deploy(dependsOn: distZip) << {
 def getSsh() {
   def options = new SshOptions()
   options.with { 
-    defaultKeyFile = new File('garage48.pem')
-    defaultUser = 'ubuntu'
+    defaultKeyFile = new File('quiq-ly.pem')
+    defaultUser = 'ec2-user'
     defaultHost = project.production.server
     logger = new GradleLogger(project, true)
   }
@@ -184,10 +112,10 @@ def getSsh() {
 def getDb() {
   if (project.hasProperty('env') && project.env == 'production') {
     def mongo = new GMongo(project.production.database)
-    return mongo.getDB('tell-me')
+    return mongo.getDB('quiq-ly')
   } else {
     def mongo = new GMongo()
-    return mongo.getDB('tell-me')
+    return mongo.getDB('quiq-ly')
   }
 }
 

@@ -1,0 +1,62 @@
+project.ext {
+
+  questions = [
+    [ 
+      _id: UUID.randomUUID().toString(),
+      _random: (Integer) (Math.random() * 100),
+      title: 'Which of these languages can you use?', 
+      answers: [
+        [ title: 'Ruby' ],
+        [ title: 'Python' ],
+        [ title: 'Java' ],
+        [ title: 'Groovy' ],
+      ]
+    ],
+    [ 
+      _id: UUID.randomUUID().toString(),
+      _random: (Integer) (Math.random() * 100),
+      title: 'What did you have dreams about last night?', 
+      answers: [
+        [ title: 'Female designers', image: '' ],
+        [ title: 'Two pancakes', image: '' ],
+        [ title: 'iPads', image: '' ],
+        [ title: 'Miley Cyrus', image: '' ],
+      ]
+    ],
+    [ 
+      _id: UUID.randomUUID().toString(),
+      _random: (Integer) (Math.random() * 100),
+      title: 'What is your role at Garage48?', 
+      answers: [
+        [ title: 'Visionary' ],
+        [ title: 'Marketer' ],
+        [ title: 'Designer' ],
+        [ title: 'Developer' ],
+      ]
+    ],
+    [ 
+      _id: UUID.randomUUID().toString(),
+      _random: (Integer) (Math.random() * 100),
+      title: 'Who will win Garage48 in Riga, 2013?', 
+      answers: [
+        [ title: 'Zentox' ],
+        [ title: 'EduTree' ],
+        [ title: 'Happinex' ],
+        [ title: 'quiq.ly' ],
+        [ title: 'BizCards' ],
+        [ title: 'Feel Riga' ],
+        [ title: 'Maps team' ],
+        [ title: 'Collective praying' ],
+        [ title: 'Freenlancer' ],
+        [ title: 'Poble' ],
+        [ title: 'myCogo' ],
+        [ title: 'Remote Control' ],
+        [ title: 'Best Friends Game' ],
+        [ title: 'airbay.me' ],
+        [ title: '3dcutting' ],
+        [ title: 'Recipes' ],
+      ]
+    ],
+  ]
+
+}
