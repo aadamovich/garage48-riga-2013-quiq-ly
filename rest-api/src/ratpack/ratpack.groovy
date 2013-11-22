@@ -5,6 +5,7 @@ import groovy.json.JsonSlurper
 import ratpack.groovy.templating.*
 
 import static ratpack.groovy.Groovy.*
+import ly.quiq.data.*
 
 ratpack {
 

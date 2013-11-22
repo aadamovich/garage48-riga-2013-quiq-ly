@@ -2,15 +2,17 @@
 project.ext {
 
   local = [
-    server   : 'localhost',
-    database : 'localhost:27017',
-    api      : 'http://localhost:5050'
+    server    : 'localhost',
+    database  : 'localhost:27017',
+    db_tunnel : true,
+    api       : 'http://localhost:5050'
   ]
 
   production = [
-    server   : 'ec2-54-246-65-207.eu-west-1.compute.amazonaws.com',
-    database : 'localhost:27017',
-    api      : 'http://ec2-54-246-65-207.eu-west-1.compute.amazonaws.com'
+    server    : 'ec2-54-247-102-175.eu-west-1.compute.amazonaws.com',
+    database  : 'localhost:27017',
+    db_tunnel : true,
+    api       : 'http://ec2-54-247-102-175.eu-west-1.compute.amazonaws.com'
   ]
 
 }

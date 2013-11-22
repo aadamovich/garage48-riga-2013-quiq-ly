@@ -1,8 +1,10 @@
 import groovy.json.JsonSlurper
 
-def data = new URL("http://quiq.ly/api/question/09e2b2e1-e94c-4e71-b429-c86fdec27438").text
+def id = "09e2b2e1-e94c-4e71-b429-c86fdec27438"
+def data = new URL("http://quiq.ly/api/question/${id}").text
 def parsedData = new JsonSlurper().parseText(data)
 
 parsedData.answers.sort{ -it.value }.each { answer ->
   println "${answer.title} ${answer.value}"
 }
+
