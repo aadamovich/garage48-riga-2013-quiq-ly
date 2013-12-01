@@ -1,11 +1,11 @@
 import static ly.quiq.data.DataService.*
+import static ratpack.groovy.Groovy.*
+
+import ly.quiq.data.*
 import ratpack.groovy.templating.*
 
 import groovy.json.JsonSlurper
-import ratpack.groovy.templating.*
 
-import static ratpack.groovy.Groovy.*
-import ly.quiq.data.*
 
 ratpack {
 
@@ -40,6 +40,26 @@ ratpack {
 	// API 
 	//////////////////////////////////////////////
 
+//	get("api/categories/1") {
+//		
+//	}
+//
+//	get("api/users/1") {
+//	
+//    }	
+//
+//	get("api/users/1") {
+//	
+//	}
+//
+//	get("api/users/1") {
+//	
+//	}
+//
+//	get("api/permissions/1") {
+//	
+//	}
+		
 	get("api/questions/random1") {
 		render DataService.getJsonRandomQuestion()
 	}

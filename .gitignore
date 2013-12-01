@@ -3,3 +3,9 @@ response.json
 *.exe
 *.ppk
 *.pem
+/webapp/.classpath
+/webapp/.project
+/webapp/.settings
+/webapp/*.iml
+/webapp/*.ipr
+/webapp/*.iws

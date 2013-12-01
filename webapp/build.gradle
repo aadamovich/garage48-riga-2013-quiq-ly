@@ -26,6 +26,7 @@ buildscript {
 apply   from: 'envs.gradle'
 apply   from: 'data.gradle'
 apply plugin: 'ratpack-groovy'
+apply plugin: 'idea'
 
 repositories {
   maven { url "http://oss.jfrog.org/repo" }
