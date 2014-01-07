@@ -27,6 +27,7 @@ apply   from: 'envs.gradle'
 apply   from: 'data.gradle'
 apply plugin: 'ratpack-groovy'
 apply plugin: 'idea'
+apply plugin: 'eclipse'
 
 repositories {
   maven { url "http://oss.jfrog.org/repo" }
@@ -42,6 +43,8 @@ dependencies {
   springloaded 'org.springsource.springloaded:springloaded-core:1.1.4'
   compile 'com.gmongo:gmongo:1.0'
   compile 'org.codehaus.groovy:groovy-all:2.1.9'
+  compile 'io.ratpack:ratpack-core:0.9.0-SNAPSHOT'
+  compile 'io.ratpack:ratpack-groovy:0.9.0-SNAPSHOT'
 }
 
 test.onlyIf { false }
@@ -89,7 +92,7 @@ task deploy(dependsOn: distZip) << {
     exec(command: 'sudo rm -rf /var/lib/quiq-ly/*', failOnError: false)  
     exec(command: 'sudo mkdir -p /var/lib/quiq-ly/storage', failOnError: false)
     exec 'sudo unzip /tmp/rest-api.zip -d /var/lib/quiq-ly'
-    exec 'sudo chown -R ec2-user:ec2-user /var/lib/quiq-ly'
+    exec 'sudo chown -R ubuntu:ubuntu /var/lib/quiq-ly'
     exec 'cd /var/lib/quiq-ly/rest-api/bin ; nohup sudo -b ./rest-api > /var/lib/quiq-ly/rest-api/server.log'
   }
 }
@@ -103,7 +106,7 @@ def getSsh() {
   def options = new SshOptions()
   options.with { 
     defaultKeyFile = new File('quiq-ly.pem')
-    defaultUser = 'ec2-user'
+    defaultUser = 'ubuntu'
     defaultHost = project.production.server
     logger = new GradleLogger(project, true)
   }

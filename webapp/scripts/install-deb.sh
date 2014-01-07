@@ -1,4 +1,5 @@
 
+sudo apt-get update
 sudo apt-get install mongodb
 sudo apt-get install openjdk-7-jdk
 sudo apt-get install unzip
@@ -9,5 +10,5 @@ sudo mkdir -p /var/lib/quiq-ly/storage
 
 sudo service ufw stop
 sudo service nginx start
-sudo service mongod start
+sudo service mongodb start
 

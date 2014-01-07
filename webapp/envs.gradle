@@ -9,10 +9,10 @@ project.ext {
   ]
 
   production = [
-    server    : 'ec2-54-247-102-175.eu-west-1.compute.amazonaws.com',
+    server    : '54.194.173.131',
     database  : 'localhost:27017',
     db_tunnel : true,
-    api       : 'http://ec2-54-247-102-175.eu-west-1.compute.amazonaws.com'
+    api       : 'http://54.194.173.131'
   ]
 
 }
