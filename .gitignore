@@ -9,3 +9,4 @@ response.json
 /webapp/*.iml
 /webapp/*.ipr
 /webapp/*.iws
+/webapp/out
